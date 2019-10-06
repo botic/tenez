@@ -1,0 +1,42 @@
+<h2><% message text="Kundenverwaltung" %></h2>
+
+<% queryParam name="customerquery" | isNull | boolean true=<%userlist.totalPages | switch 0=<% message text="Noch keine Benutzer angelegt."%> %> %>
+
+<% queryParam name="customerquery" | isNull | boolean false=<%userlist.totalPages | switch 0=<% this.renderSkin skin="listCustomers#cancelSearch" %> %> %>
+
+<ul class="list itemcount<% userlist.totalPages %>" id="userList">
+    <% userlist.render skin="line" %>
+    <li class="listNavigation"><% userlist.prevLink text=<% message text="zurück" %> %><span class="position"><% message text="Seite" %> <% userlist.currentPage %> <% message text="von" %> <% userlist.totalPages %></span><% userlist.nextLink text=<% message text="weiter"%> %></li>
+</ul>
+
+<div id="usersearch" class="itemcount<% queryParam name="customerquery" | isNull | boolean true=<% userlist.totalPages %> false=<% userlist.totalPages | switch 0='isQueryWithNoResults' default='12345' %> %>">
+<form action="<% this.href action='listCustomers' %>" method="GET">
+    <input type="text" value="<% queryParams name='customerquery' encoding='form' %>" name="customerquery" style="width: 170px; margin-right: 15px; float: left;"/>
+
+    <button type="submit" id="sel-dosearch" value="Submit" class="button">
+      <span><span><% message text="Suchen" %></span></span>
+    </button>
+
+</form>
+</div>
+<% adminuser.hasPermission name="can_add_users" | boolean true=<% this.renderSkin skin="listCustomers#create" %> %>
+<% adminuser.hasPermission name="can_add_users" | boolean true=<% this.renderSkin skin="listCustomers#import" %> %>
+<% adminuser.hasPermission name="can_view_users" | boolean true=<% this.renderSkin skin="listCustomers#export" param=<% param.filter %> %> %>
+
+<% #create %>
+<div id="createCustomerButton" class="itemcount<% userlist.totalPages %>">
+<a href="<% this.href action='createCustomer' %>" class="button" id="sel-club-createcustomerbutton" style="font-weight: bold;"><span><span><% message text="Kunden hinzufügen" %></span></span></a>
+</div>
+
+<% #import %>
+<div id="importCustomerButton" class="itemcount<% userlist.totalPages %>">
+<a href="<% this.href action='importUsers' %>" class="button"><span><span><% message text="Daten importieren" %></span></span></a>
+</div>
+
+<% #export %>
+<div id="exportCustomerButton" class="itemcount<% userlist.totalPages %>">
+<a href="<% this.href action='exportUsers' %>?query=<% param.query %>&switcher=<% param.switcher %>" class="button"><span><span><% message text="Daten exportieren" %></span></span></a>
+</div>
+
+<% #cancelSearch %>
+<% message text="Keine Benutzer gefunden, die dem Suchkriterium" %> <em class="qparam"><% queryParam name="customerquery" encoding="form" %></em> <% message text="entsprachen." %>

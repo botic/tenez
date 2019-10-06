@@ -1,0 +1,82 @@
+<h2><% message text="Reservierungen" %><% param.name prefix=" &ndash; " %></h2>
+
+<script type="text/javascript">
+    $(function() {
+        $.datepicker.setDefaults($.datepicker.regional['de']);
+
+        $("#datepickerfrom").datepicker({
+            showOn: 'focus',
+            dateFormat: 'dd.mm.yy',
+            firstDay: 1,
+            minDate: new Date('<% param.minDay | dateFormat "yyyy/MM/dd" %>'),
+            defaultDate: new Date('<% param.start | dateFormat "yyyy/MM/dd" %>')
+        });
+        $("#datepickerto").datepicker({
+            showOn: 'focus',
+            dateFormat: 'dd.mm.yy',
+            firstDay: 1,
+            minDate: new Date('<% param.minDay | dateFormat "yyyy/MM/dd" %>'),
+            defaultDate: new Date('<% param.end | dateFormat "yyyy/MM/dd" %>')
+        });
+    });
+</script>
+
+<form name="dateform" action="<% this.href action="reservations" %>" method="GET" style="position: absolute; left: 800px;">
+    <div class="datepicker" style="float: right; text-align: right;">
+        <div><% message text="Beginn" %>: <input type="text" value="<% param.from default='' %>" id="datepickerfrom" name="from" /></div>
+        <div style="margin-top: 8px;"><% message text="Ende" %>: <input type="text" value="<% param.to default='' %>" id="datepickerto" name="to" /></div>
+    </div>
+
+    <div class="buttons" style="clear: right; float: right; padding-top: 8px;">
+        <button type="submit" value="Submit" class="">
+          <span><span><% message text="Zeitraum anzeigen" %></span></span>
+        </button>
+    </div>
+</form>
+
+        
+<div class="gfx" style="margin-top: 25px;">
+<div id="gfx-root-reservations" style="height: 555px;"></div>
+<script type="text/javascript">
+    var sales = <% param.sales %>;
+    var bookings = <% param.bookings %>;
+    
+    var r = Raphael("gfx-root-reservations");
+
+
+    var xs = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        ys = [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7,
+6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6,
+5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
+4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
+3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
+2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+        axisy = ["So", "Sa", "Fr", "Do", "Mi", "Di", "Mo"],
+        axisx = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"];
+
+    r.g.txtattr.font = "12px Arial, sans-serif";
+    r.g.text(75, 10, "Reservierungen pro Stunde");
+    r.g.dotchart(0, 0, 620, 260, xs, ys, bookings, {symbol: "o", max: 10, heat: true, axis: "0 0 1 1", axisxstep: 23, axisystep: 6, axisxlabels: axisx, axisxtype: " ", axisytype: " ", axisylabels: axisy}).hover(function () {
+                    this.tag = this.tag || r.g.tag(this.x, this.y, this.value + " Reservierungen", 0, this.r + 2).insertBefore(this);
+                    this.tag.show();
+                }, function () {
+                    this.tag && this.tag.hide();
+                });
+    r.g.text(611, 250, "Uhr");
+
+    r.g.text(50, 309, "Umsatz pro Stunde");
+    r.g.dotchart(0, 301, 620, 260, xs, ys, sales, {symbol: "o", max: 10, heat: true, axis: "0 0 1 1", axisxstep: 23, axisystep: 6, axisxlabels: axisx, axisxtype: " ", axisytype: " ", axisylabels: axisy}).hover(function () {
+                    this.tag = this.tag || r.g.tag(this.x, this.y, this.value + " Euro", 0, this.r + 2).insertBefore(this);
+                    this.tag.show();
+                }, function () {
+                    this.tag && this.tag.hide();
+                });
+    r.g.text(611, 550, "Uhr");
+</script>
+</div>
+
+<hr/>
+
+<% #empty %>
+<h2><% message text="Zu wenige Reservierungen!" %></h2>

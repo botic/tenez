@@ -1,0 +1,26 @@
+<h1><% response.title %></h1>
+
+<form name="dateForm" action="<% this.href %>" method="POST">
+
+<script type="text/javascript">
+    $(function() {
+        $.datepicker.setDefaults($.datepicker.regional['de']);
+        $("#day").datepicker({showOn: 'focus', dateFormat: 'dd.mm.yy', firstDay: 1});
+        $("#day").datepicker('setDate', '<% response.day_diff %>'); 
+    });
+</script>
+
+<!-- Datepicker -->
+<div class="datepicker">
+<div id="sel-back" class="back"><a href="<% this.href %>?day=<% response.day | minusOneDay | formatDate %>">&laquo;</a></div>
+<div id="sel-day" class="day"><div class="weekday"><% response.day | formatWeekday %></div><input type="text" id="day" name="day" class="input" value="<% response.day | formatDate %>" onChange="document.dateForm.submit()" /></div>
+<div id="sel-forward" class="forward"><a href="<% this.href %>?day=<% response.day | plusOneDay | formatDate %>">&raquo;</a></div>
+<div class="today"><a href="<% this.href %>?day=<% nowDate | formatDate %>" class="button" id="sel-today"><span><span><% message text="Heute" %></span></span></a></div>
+</div>
+</form>
+
+<div class="timetables" id="sel-timetables" style="clear:both; padding-top: 20px;">
+    <% this.showTimetables %>
+</div>
+
+<div class="clear" />

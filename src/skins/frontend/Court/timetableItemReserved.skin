@@ -1,0 +1,35 @@
+<div class="timetableItem <% param.item.reservation.user.isCurrentUser | boolean true="own" false="reserved" %>">
+<% param.item.reservation.user.isCurrentUser | boolean true=<% this.renderSkin skin="timetableItemReserved#resLinkStart" param=<% param.item %> %> %>
+    <div class="time start"><% param.item.start | formatTime %></div>
+    <div class="time end">&ndash; <% param.item.end | formatTime action="set2359to2400" %></div>
+    <% param.item.reservation.user.isCurrentUser | boolean 
+        true=<% this.renderSkin skin="timetableItemReserved#userInfo" param=<% param.item %> %> 
+        false=<% param.item.reservation.user.club.showuserinfo | boolean 
+            true=<% this.renderSkin skin="timetableItemReserved#userInfo" param=<% param.item %> %> 
+            false=<% this.renderSkin skin="timetableItemReserved#noUserInfo" param=<% param.item %> %> %> %>  
+    <% param.item.reservation.user.isCurrentUser | boolean 
+        true=<% param.item.price_std | equals value=<% param.item.reservation.transaction.price | multNegOne %> | boolean 
+            false=<% this.renderSkin skin="timetableItemReserved#priceWithDiscount" param=<% param.item %> %> 
+            true=<% this.renderSkin skin="timetableItemReserved#priceWithoutDiscount"param=<% param.item %> %> %>
+        false=<% this.renderSkin skin="timetableItemReserved#priceWithoutDiscount" param=<% param.item %> %> %>   
+<% param.item.reservation.user.isCurrentUser | boolean true=<% this.renderSkin skin="timetableItemReserved#resLinkEnd" param=<% param.item %> %> %>
+</div>
+
+
+<% #resLinkStart %>
+<a href="<% param.reservation.href %>">
+
+<% #resLinkEnd %>
+</a>
+
+<% #userInfo %>
+    <div class="tslabel"><% param.reservation.user.fullname encoding='form' %></div>
+
+<% #noUserInfo %>
+    <div class="tslabel"><% message text="Reserviert" %></div>
+    
+<% #priceWithDiscount %>
+    <div class="price"><span class="org"><% param.price_std | formatMoney %> <% currencySymbol %></span><br><span class="real"><% param.reservation.transaction.price | multNegOne | formatMoney %> <% currencySymbol %></span></div>
+
+<% #priceWithoutDiscount %>
+    <div class="price"><% param.price_std | formatMoney %> <% currencySymbol %></div>

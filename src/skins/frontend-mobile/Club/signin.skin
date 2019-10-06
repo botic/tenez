@@ -1,0 +1,43 @@
+<h2><% message text="Anmeldung" %></h2>
+
+<div class="loginmaskFrontend">
+
+<form id="signinUserFrontend" action="<% this.href action="signin" %>" method="POST" class="form px140">
+
+<%// Init the new form and, if available, also get the previously submitted one %>
+<% form.init old=<% response.message %> %>
+
+<%// Display the error messages %>
+<% form.messages prefix='<div class="error">' suffix='</div>' %>
+
+<!-- Username -->
+<div class="formLine">
+<label for="username"><% message text="Benutzername:" %></label>
+<input type="text" value="" name="username" />
+
+<%// Add the username field to the form handler %>
+<% form.add name="username" required="true" message=<% message text="Bitte geben Sie einen Benutzernamen ein!" %> missing=<% message text="Bitte geben Sie einen Benutzernamen ein!" %> %>
+</div>
+
+<!-- Pin -->
+<div class="formLine">
+<label for="password"><% message text="Passwort:" %></label>
+<input type="password" value="" name="password" />
+<% form.add name="password" required="true" message=<% message text="Bitte geben Sie ein Passwort ein!" %> %>
+</div>
+
+<!--  Destination URL -->
+<input type="hidden" value="<% response.desturl %>" name="desturl" />
+<% form.add name="desturl" required="false" %>
+
+<div class="buttons">
+    <button type="submit" value="Submit" class="submit" id="sel-createreservation-login">
+      <span><span>&nbsp;&nbsp;<% message text="Anmelden" %>&nbsp;&nbsp;</span></span>
+    </button>
+</div>
+
+</form>
+
+</div>
+
+<hr/>

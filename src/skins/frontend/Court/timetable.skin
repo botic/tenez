@@ -1,0 +1,6 @@
+<div class="timetable">
+    <h2>
+        <% this.name encoding='form' %>
+    </h2>
+    <% this.showTimetableItems %>
+</div>

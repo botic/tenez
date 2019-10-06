@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Kundenliste" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<parameter name="clubid" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[$P{REPORT_PARAMETERS_MAP}.get("t_clubid")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="logofile" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{REPORT_PARAMETERS_MAP}.get("t_logofile")]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     t_user."usr_username" AS t_user_usr_username,
+     t_user."usr_password" AS t_user_usr_password,
+     t_user."usr_firstname" AS t_user_usr_firstname,
+     t_user."usr_lastname" AS t_user_usr_lastname,
+     t_user."usr_title" AS t_user_usr_title,
+     t_user."usr_company" AS t_user_usr_company,
+     t_user."usr_iscompany" AS t_user_usr_iscompany,
+     t_contact."con_street" AS t_contact_con_street,
+     t_contact."con_street2" AS t_contact_con_street2,
+     t_contact."con_city" AS t_contact_con_city,
+     t_contact."con_phone" AS t_contact_con_phone,
+     t_contact."con_fax" AS t_contact_con_fax,
+     t_contact."con_email" AS t_contact_con_email,
+     t_contact."con_url" AS t_contact_con_url,
+     t_user."usr_contact" AS t_user_usr_contact,
+     t_contact."con_id" AS t_contact_con_id
+FROM
+     "public"."t_contact" t_contact,
+     "public"."t_user" t_user
+WHERE
+     t_user."usr_contact" = t_contact."con_id"
+ AND t_user.usr_club = $P{clubid}]]>
+	</queryString>
+	<field name="t_user_usr_username" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="t_user_usr_password" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="t_user_usr_firstname" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="t_user_usr_lastname" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="t_user_usr_title" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="t_user_usr_company" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="t_user_usr_iscompany" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="t_contact_con_street" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="t_contact_con_street2" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="t_contact_con_city" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="t_contact_con_phone" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="t_contact_con_fax" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="t_contact_con_email" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="t_contact_con_url" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="21" splitType="Stretch">
+			<staticText>
+				<reportElement x="454" y="0" width="100" height="20"/>
+				<textElement>
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Kundenliste]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="1" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="0" width="554" height="1"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="82" splitType="Stretch">
+			<textField>
+				<reportElement x="71" y="0" width="92" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{t_user_usr_username}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="71" height="20"/>
+				<textElement/>
+				<text><![CDATA[Kundenname:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="40" width="71" height="20"/>
+				<textElement/>
+				<text><![CDATA[Vorname:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="71" y="40" width="92" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{t_user_usr_firstname}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="60" width="71" height="20"/>
+				<textElement/>
+				<text><![CDATA[Nachname:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="71" y="60" width="92" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{t_user_usr_lastname}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="71" y="20" width="92" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{t_user_usr_title}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="20" width="71" height="20"/>
+				<textElement/>
+				<text><![CDATA[Titel:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="163" y="62" width="43" height="20"/>
+				<textElement/>
+				<text><![CDATA[PLZ:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="79" width="554" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="163" y="0" width="43" height="20"/>
+				<textElement/>
+				<text><![CDATA[Straße:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="163" y="40" width="43" height="20"/>
+				<textElement/>
+				<text><![CDATA[Stadt:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="206" y="0" width="100" height="39"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{t_contact_con_street}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="330" y="0" width="43" height="20"/>
+				<textElement/>
+				<text><![CDATA[Telefon:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="330" y="39" width="43" height="20"/>
+				<textElement/>
+				<text><![CDATA[Email:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="330" y="59" width="43" height="20"/>
+				<textElement/>
+				<text><![CDATA[Website:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="373" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{t_contact_con_phone}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="373" y="39" width="182" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{t_contact_con_email}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="373" y="59" width="181" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{t_contact_con_url}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="330" y="20" width="43" height="20"/>
+				<textElement/>
+				<text><![CDATA[Fax:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="373" y="20" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{t_contact_con_fax}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="4" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="4" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

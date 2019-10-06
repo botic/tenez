@@ -1,0 +1,34 @@
+<h2><% message text="Buchung Nr." %> <% this.id %></h2>
+<table id="txMain">
+<colgroup>
+    <col class="txLabel" />
+    <col class="txValue" />
+</colgroup>
+<tr>
+    <td><% message text="Text" %>:</td>
+    <td><% this.action %></td>
+</tr>
+<tr>
+    <td><% message text="Datum" %>:</td>
+    <td><% this.date | dateFormat "dd.MM.yyyy" %></td>
+</tr>
+<tr>
+    <td><% message text="Betrag brutto" %>:</td>
+    <td><% this.grossvalue | replace old='-' new='&#x2D;' %> <% currencyCode %></td>
+</tr>
+<tr>
+    <td><% message text="Rabatt" %>:</td>
+    <td><% this.discount | toPercent %> %</td>
+</tr>
+<tr class="strong saldo">
+    <td><% message text="Betrag netto" %>:</td>
+    <td><strong><% this.price | replace old='-' new='&#x2D;' %> <% currencyCode %></strong></td>
+</tr>
+</table>
+<p id="printbutton">
+    <a href="JavaScript:window.print();" class="button"><span><span>Drucken</span></span></a>
+    <% adminuser.hasPermission name="can_view_bookings" | boolean true=<% this.renderSkin skin="mainTransaction#accountingAction" %> %>
+</p>
+
+<% #accountingAction %>
+<a href="<% this.user.href action='accounting' %>" class="button" id="sel-tx-backtooverview"><span><span>Kontoübersicht</span></span></a>

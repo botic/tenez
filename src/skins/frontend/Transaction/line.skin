@@ -1,0 +1,12 @@
+<tr>
+    <td><% this.date | dateFormat "dd.MM.yyyy" %></td>
+    <td>Nr. <% this.id %></td>
+    <td style="text-align: right;" ><% this.reservation | isNull
+                            | boolean true=<% this.grossvalue | formatMoney | replace old='-' new='&#x2D;' | append " " | append <% currencyCode %> %> %></td>
+    <td style="text-align: right;" ><% this.reservation | isNull
+                            | boolean true=<% this.discount | toPercent | append " %" %> %></td>
+    <td style="text-align: right;" ><% this.price | formatMoney | replace old='-' new='&#x2D;' | append " " | append <% currencyCode %> %></td>
+    <td style="text-align: left; padding-left: 25px;"><% this.reservation | isNull
+                            | boolean true=<% this.action | escapeHtml %> false=<% this.reservation.renderSkin skin='postingText' failmode='silent' %>
+       %></td>
+</tr>

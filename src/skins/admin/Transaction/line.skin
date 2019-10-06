@@ -1,0 +1,15 @@
+<li style="text-align: left; overflow: hidden;" <% this.isDebit | boolean true='class="debit"' %>>
+    <a href="<% this.href %>" style="color: inherit;">
+    <div style="float: left; width: 215px;"><% this.date | dateFormat "dd.MM.yyyy" %>  &ndash; Nr. <% this.id %></div>
+    <div style="float: left; width: 115px; text-align: right;"><% this.price | formatMoney | replace old='-' new='&#x2D;' %> <% currencyCode %></div>
+    <div style="float: left; width: 95px;  text-align: right;"><% this.discount | toPercent %> %</div>
+    <div style="float: left; width: 140px; text-align: right; margin-right: 50px;"><% this.grossvalue | formatMoney | replace old='-' new='&#x2D;' %> <% currencyCode %></div>
+    <% this.action | truncate limit=43 clipping="..."%></a>
+</li>
+
+<% #cockpit %>
+<tr>
+    <td><% this.date | dateFormat 'dd.MM.yyyy' %></td>
+    <td><% this.action | truncate limit="32" clipping="..." %></td>
+    <td style="text-align: right;"><% this.price | formatMoney %> <% currencyCode %></td>
+</tr>

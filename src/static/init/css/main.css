@@ -1,0 +1,33 @@
+#init_block {
+    width: 500px; 
+    margin: 0 auto; 
+    margin-top: 80px;
+    border: 1px solid #293650;
+    background-color: #eef0f4; 
+    height: 320px; 
+}
+
+#init_block #logo {
+    background: url('../images/logo.png') no-repeat;
+    background-position: center;
+    height: 110px;
+    margin: 30px;
+}
+
+#init_block #text {
+    text-align: center; 
+    font-family: Arial, Verdana; 
+    font-size: 50px;
+    padding: 30px;
+    color: #2f9a57;
+}
+
+#init_block #text a {
+    text-decoration: none;
+    color: #8395A6;
+}
+
+#init_block #text a:hover,
+#init_block #text a:focus {
+    color: #d34524;
+}

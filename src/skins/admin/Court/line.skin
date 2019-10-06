@@ -1,0 +1,35 @@
+<li id="item_<% this.id %>">
+<div class="linetext">
+    <% adminuser.hasPermission name="can_edit_courts" | boolean true=<% this.renderSkin skin="line#move" %> %>
+    <a href="<% this.href action='listTimeslots' %>"><% this.name encoding='form' %></a>
+</div>
+<div class="actions">
+    <% adminuser.isSysAdmin | boolean true=<% this.active | boolean true=<% this.renderSkin skin="line#deactivate" %> %> %>
+    <% adminuser.hasPermission name="can_edit_courts" | boolean true=<% this.renderSkin skin="line#editAction" %> %>
+    <% adminuser.hasPermission name="can_view_timeslots" | boolean true=<% this.renderSkin skin="line#timeslotsAction" %> %>
+</div>
+</li>
+
+<% #deactivated %>
+<li>        
+<div class="linetext"><% this.name encoding='form' %></div>
+<div class="actions">
+    <% adminuser.isSysAdmin | boolean true=<% this.active | boolean true=<% this.renderSkin skin="line#deactivate" %> false=<% this.renderSkin skin="line#activate" %> %> %>
+    <% adminuser.hasPermission name="can_edit_courts" | boolean true=<% this.renderSkin skin="line#editAction" %> %>
+</div>
+</li>
+
+<% #editAction %>
+<a href="<% this.href action='edit' %>" class="button"  id="sel-edit-<% this.alias %>"><span><span><% message text="Editieren" %></span></span></a>
+
+<% #timeslotsAction %>
+<a href="<% this.href action='listTimeslots' %>" class="button"  id="sel-listtimeslots-<% this.alias %>"><span><span><% message text="Zeiteinheiten" %></span></span></a>
+
+<% #deactivate %>
+<a href="<% this.href action='deactivate' %>" class="button"  id="sel-deactivate-<% this.alias %>"><span><span><% message text="Deaktivieren" %></span></span></a>
+
+<% #activate %>
+<a href="<% this.href action='activate' %>" class="button"  id="sel-activate-<% this.alias %>"><span><span><% message text="Aktivieren" %></span></span></a>        
+
+<% #move %>
+<img src="<% staticUrl path="images/move.png" %>" alt="" title="Anordnung verändern" id="moveButton" class="handle" />

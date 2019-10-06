@@ -1,0 +1,5 @@
+<div class="formLine px300">
+    <label for="permissiongroup"><% message text="Berechtigungsgruppe:" %></label>
+
+    <% param.dropdown %>
+</div>

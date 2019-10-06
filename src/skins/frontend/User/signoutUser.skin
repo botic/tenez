@@ -1,0 +1,7 @@
+<div id="signout">
+    <p class="username"><% frontenduser.username encoding='form' %></p>
+    <p class="fullname"><% frontenduser.fullname | truncate limit="30" | escapeHtml %></p>
+    <p class="clubuser">
+        <a class="signout" href="<% frontenduser.club.href action='signout' %>"><% message text="Abmelden" %></a>
+    </p>
+</div>

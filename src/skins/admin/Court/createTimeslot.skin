@@ -1,0 +1,98 @@
+<form id="createTimeslot" action="<% this.href action="createTimeslot" %>" method="POST" class="form px200">
+
+<% form.init old=<% response.message %> %>
+<% form.messages prefix='<div class="error">' suffix='</div>' %>
+
+<h2><% message text="Zeiteinheit festlegen" %></h2>
+
+<script type="text/javascript">
+    $(function() {
+        $.datepicker.setDefaults($.datepicker.regional['de']);
+
+        var periodstart = getDateFromString('<% form.oldValue name='periodstart' default='0' %>');
+        var periodend   = getDateFromString('<% form.oldValue name='periodend'   default='0' %>');
+        
+        $("#periodstart").datepicker({showOn: 'focus', dateFormat: 'dd.mm.yy', firstDay: 1});
+        $("#periodstart").datepicker('setDate', periodstart || '0'); 
+        
+        $("#periodend").datepicker({showOn: 'focus', dateFormat: 'dd.mm.yy', firstDay: 1});
+        if(periodend) {
+            $("#periodend").datepicker('setDate', periodend); 
+        }
+        $('#periodend').datepicker('option', 'minDate', '0');
+
+        $("#periodstart").change(function() {
+            $('#periodend').datepicker('option', 'minDate', $('#periodstart').datepicker('getDate'));
+        });
+    });
+</script>
+
+<!-- Start -->
+<div class="formLine px300">
+<label for="timestart"><% message text="Beginn" %>:<span class="formRequired">*</span></label>
+<input type="text" value="<% form.oldValue name='timestart' encoding='form' %>" name="timestart" style="width: 45px; text-align:right;" />&nbsp;&nbsp;<% message text="Uhr" %>
+<% form.add name="timestart" validator="time" required="true" message=<% message text="Ungültiger Beginn angegeben." %> missing=<% message text="Kein Beginn angegeben." %> %>
+</div>
+
+<!-- End -->
+<div class="formLine px300">
+<label for="timeend"><% message text="Ende" %>:<span class="formRequired">*</span></label>
+<input type="text" value="<% form.oldValue name='timeend' encoding='form' %>" name="timeend" style="width: 45px; text-align:right;" />&nbsp;&nbsp;<% message text="Uhr" %>
+<% form.add name="timeend" validator="time" required="true" message=<% message text="Ungültiges Ende angegeben." %> missing=<% message text="Kein Ende angegeben." %> %>
+</div>
+
+<!-- Slotsize -->
+<div class="formLine px300">
+<label for="slotsize"><% message text="Intervall" %>:<span class="formRequired">*</span></label>
+<input type="text" value="<% form.oldValue name='slotsize' encoding='form' %>" name="slotsize" style="width: 45px; text-align:right;" />&nbsp;&nbsp;<% message text="Minuten" %>
+<% form.add name="slotsize" validator="integer" required="true" message=<% message text="Ungültiges Intervall angegeben." %> missing=<% message text="Kein Intervall angegeben." %> %>
+</div>
+
+<!-- Price -->
+<div class="formLine px300">
+<label for="slotsize"><% message text="Preis" %>:<span class="formRequired">*</span></label>
+<input type="text" value="<% form.oldValue name='price' encoding='form' %>" name="price" style="width: 45px; text-align:right;" />&nbsp;&nbsp;<% currencyCode %>
+<% form.add name="price" validator="money" required="true" message=<% message text="Ungültiger Preis angegeben." %> missing=<% message text="Kein Preis angegeben." %> %>
+</div>
+
+<!-- Weekdays -->
+<div class="formLine px25">
+<label for="weekdays"><% message text="Gültig an" %>:<span class="formRequired">*</span></label>
+<input type="checkbox" name="weekdays_mo" id="weekdays_mo" <% form.oldValue name='weekdays_mo' | boolean true='checked="checked"' %> />
+<label for="weekdays_mo" style="width: auto; float: none; top: 1px; position: relative; left: 3px; padding-right: 15px;">Mo</label>
+<input type="checkbox" name="weekdays_tu" id="weekdays_tu" <% form.oldValue name='weekdays_tu' | boolean true='checked="checked"' %> />
+<label for="weekdays_tu" style="width: auto; float: none; top: 1px; position: relative; left: 3px; padding-right: 15px;">Di</label>
+<input type="checkbox" name="weekdays_we" id="weekdays_we" <% form.oldValue name='weekdays_we' | boolean true='checked="checked"' %> />
+<label for="weekdays_we" style="width: auto; float: none; top: 1px; position: relative; left: 3px; padding-right: 15px;">Mi</label>
+<input type="checkbox" name="weekdays_th" id="weekdays_th" <% form.oldValue name='weekdays_th' | boolean true='checked="checked"' %> />
+<label for="weekdays_th" style="width: auto; float: none; top: 1px; position: relative; left: 3px; padding-right: 15px;">Do</label>
+<input type="checkbox" name="weekdays_fr" id="weekdays_fr" <% form.oldValue name='weekdays_fr' | boolean true='checked="checked"' %> />
+<label for="weekdays_fr" style="width: auto; float: none; top: 1px; position: relative; left: 3px; padding-right: 15px;">Fr</label>
+<input type="checkbox" name="weekdays_sa" id="weekdays_sa" <% form.oldValue name='weekdays_sa' | boolean true='checked="checked"' %> />
+<label for="weekdays_sa" style="width: auto; float: none; top: 1px; position: relative; left: 3px; padding-right: 15px;">Sa</label>
+<input type="checkbox" name="weekdays_su" id="weekdays_su" <% form.oldValue name='weekdays_su' | boolean true='checked="checked"' %> />
+<label for="weekdays_su" style="width: auto; float: none; top: 1px; position: relative; left: 3px; padding-right: 15px;">So</label>
+</div>
+
+<!-- Period Begin -->
+<div class="formLine px300">
+<label for="periodstart"><% message text="Gültigkeit Beginn" %>:<span class="formRequired">*</span></label>
+<input type="text" value="<% form.oldValue name='periodstart' encoding='form' %>" name="periodstart" id="periodstart" style="width: 90px;" />
+<% form.add name="periodstart" validator="date" required="true" message=<% message text="Ungültiger Gültigkeits-Beginn angegeben." %> missing=<% message text="Kein Gültigkeits-Beginn angegeben." %> %>
+</div>
+
+<!-- Period End -->
+<div class="formLine px300">
+<label for="periodend"><% message text="Gültigkeit Ende:" %></label>
+<input type="text" value="<% form.oldValue name='periodend' encoding='form' %>" name="periodend" id="periodend" style="width: 90px;" />
+<% form.add name="periodend" validator="date" required="false" message=<% message text="Ungültiges Gültigkeits-Ende angegeben." %> %> 
+</div>
+
+
+<div class="buttons">
+    <button type="submit" value="Submit" class="submit">
+      <span><span><% message text="Zeiteinheit speichern" %></span></span>
+    </button>
+</div>
+
+</form>

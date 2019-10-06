@@ -1,0 +1,33 @@
+<li>
+	<table class="newsletterinfo">
+        <colgroup>
+            <col width="120px"/>
+            <col/>
+        </colgroup>
+        <tr>
+            <td><% message text="Absender" %>:</td>
+		    <td><% this.user.username encoding='form' %><% this.user.contact.email prefix=" &ndash; " encoding='form' %></td>
+	    </tr>
+        <tr>
+            <td><% message text="Empfänger" %>:</td>
+		    <td>
+                <a href="#" class="fx-showReceivers" rel="line<% this.id %>">Anzeigen</a>
+                <div id="line<% this.id %>" class="hideInfo"><% club.newsletterArchive newsletter=<% this.id %> %></div>
+            </td>
+	    </tr>
+        <tr>
+            <td><% message text="Datum" %>:</td>
+		    <td><% this.date | formatDate "dd.MM.yyyy HH:mm"%></td>
+	    </tr>
+        <tr>
+            <td><% message text="Betreff" %>:</td>
+		    <td><% this.subject encoding='form' %></td>
+	    </tr>
+        <tr>
+            <td><% message text="Nachricht" %>:</td>
+		    <td><% this.body encoding='form' %></td>
+	    </tr>
+    </table>
+</li>
+		
+					

@@ -1,0 +1,83 @@
+<h1><% this.name encoding='form' %></h1>
+
+<div id="clubMain-cockpit">
+
+<% this.renderSkin skin="mainClub#reservations" %>
+<% adminuser.hasPermission name="can_view_bookings" | boolean true=<% this.renderSkin skin="mainClub#transactions" %> %>
+<% adminuser.hasPermission name="can_view_users" | boolean true=<% this.renderSkin skin="mainClub#customers" %> %>
+
+<div class="clubMain-item">
+    <h3><% message text="Statistik" %></h3>
+    <table>
+        <colgroup>
+            <col width="145px" />
+            <col width="210px" />
+        </colgroup>
+        <tr>
+            <td><% message text="Kunden:" %></td>
+            <td><% this.customerCount %></td>
+        </tr>
+        <tr>
+            <td><% message text="Kundengruppen:" %></td>
+            <td><% this.userGroupCount %></td>
+        </tr>
+    </table>
+</div>
+
+</div>
+
+<% #reservations %>
+<div class="clubMain-item">
+    <h3><% message text="Letzte Reservierungen" %></h3>
+    <table>
+        <colgroup>
+            <col width="95px" />
+            <col width="190px" />
+            <col width="165px" />
+        </colgroup>
+        <tr style="font-weight: bold; border-bottom: 1px solid #96A1B0;">
+            <td><% message text="Datum" %></td>
+            <td><% message text="Kunde" %></td>
+            <td><% message text="Platz" %></td>
+        </tr>
+        <% reservationlist.render skin="line#cockpit" %>
+    </table>
+</div>
+<div class="clubMain-spacer">&nbsp;</div>
+
+<% #transactions %>
+<div class="clubMain-item">
+<h3><% message text="Letzte Buchungen" %></h3>
+    <table>
+        <colgroup>
+            <col width="95px" />
+            <col width="255px" />
+            <col width="95px" />
+        </colgroup>
+        <tr style="font-weight: bold; border-bottom: 1px solid #96A1B0;">
+            <td><% message text="Datum" %></td>
+            <td><% message text="Buchungstext" %></td>
+            <td style="text-align: right;"><% message text="Buchwert" %></td>
+        </tr>
+        <% transactionlist.render skin="line#cockpit" %>
+    </table>
+</div>
+
+<% #customers %>
+<div class="clubMain-item">
+    <h3><% message text="Letzte Kundenaktivität" %></h3>
+    <table>
+        <colgroup>
+            <col width="95px" />
+            <col width="210px" />
+            <col width="150px" />
+        </colgroup>
+        <tr style="font-weight: bold; border-bottom: 1px solid #96A1B0;">
+            <td><% message text="Datum" %></td>
+            <td><% message text="Kunde" %></td>
+            <td><% message text="Aktion" %></td>
+        </tr>
+        <% loglist.render skin="line#cockpit" %>
+    </table>
+</div>
+<div class="clubMain-spacer">&nbsp;</div>

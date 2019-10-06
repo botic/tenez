@@ -1,0 +1,38 @@
+<form id="editUserGroup" action="<% this.href action="edit" %>" method="POST" class="form px160">
+
+<%// Init the new form and, if available, also get the previously submitted one %>
+<% form.init old=<% response.message %> %>
+
+<%// Display the error messages %>
+<% form.messages prefix='<div class="error">' suffix='</div>' %>
+
+<h2><% message text="Kundengruppe bearbeiten" %></h2>
+
+<!-- Name -->
+<div class="formLine px200">
+<label for="name"><% message text="Name" %>:<span class="formRequired">*</span></label>
+<input type="text" value="<% form.oldValue name='name' default=<% this.name %> encoding='form' %>" name="name" autocomplete="off" />
+<% form.add name="name" required="true" missing=<% message text="Kein Name angegeben." %> %>
+</div>
+
+<!-- Description -->
+<div class="formLine px200">
+<label for="description"><% message text="Beschreibung:" %></label>
+<input type="text" value="<% form.oldValue name='description' default=<% this.description %> encoding='form' %>" name="description" />
+</div>
+
+<!-- Discount -->
+<div class="formLine px300">
+<label for="discount"><% message text="Rabatt:" %></label>
+<input type="text" value="<% form.oldValue name='discount' initWith=<% this.discount %> toPercent='true' encoding='form' %>" name="discount" style="width: 45px; margin-right: 6px; text-align: right;" />%
+<% form.add name="discount" validator="percent" message=<% message text="Ungültige Prozentangabe!" %> required="true" missing=<% message text="Kein Rabatt angegeben." %> %>
+</div>
+
+
+<div class="buttons">
+    <button type="submit" value="Submit" class="submit">
+      <span><span><% message text="Kundengruppe bearbeiten" %></span></span>
+    </button>
+</div>
+
+</form>

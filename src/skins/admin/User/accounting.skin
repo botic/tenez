@@ -1,0 +1,75 @@
+<h2><% message text="Kontoübersicht für" %> <% this.fullname encoding='form' %></h2>
+<table id="acMain">
+<colgroup>
+    <col class="acLabel" />
+    <col class="acValue" />
+</colgroup>
+<tr>
+    <td><% message text="Gutschriften" %>:</td>
+    <td class="acMoney"><% this.credits start=<% param.start %> end=<% param.end %> | formatMoney %> <% currencyCode %></td>
+</tr>
+<tr>
+    <td><% message text="Belastungen" %>:</td>
+    <td class="acMoney"><% this.debits start=<% param.start %> end=<% param.end %> | formatMoney | replace old='-' new='&#x2D;' %> <% currencyCode %></td>
+</tr>
+<tr class="strong saldo">
+    <td><% message text="Kontostand" %>:</td>
+    <td class="acMoney"><% this.balance start=<% param.start %> end=<% param.end %> | formatMoney %> <% currencyCode %></td>
+</tr>
+</table>
+
+<% adminuser.hasPermission name="can_add_bookings" | boolean true=<% this.renderSkin skin="accounting#addBooking" %> %>
+
+<script type="text/javascript">
+    $(function() {
+        $.datepicker.setDefaults($.datepicker.regional['de']);
+        
+        $("#datepickerfrom").datepicker({
+            showOn: 'focus',
+            dateFormat: 'dd.mm.yy',
+            firstDay: 1,
+            minDate: new Date('<% param.minDay | dateFormat "yyyy/MM/dd" %>'),
+            maxDate: new Date('<% param.maxDay | dateFormat "yyyy/MM/dd" %>'),
+            defaultDate: new Date('<% param.start | dateFormat "yyyy/MM/dd" %>')
+        });
+        $("#datepickerto").datepicker({
+            showOn: 'focus',
+            dateFormat: 'dd.mm.yy',
+            firstDay: 1,
+            minDate: new Date('<% param.minDay | dateFormat "yyyy/MM/dd" %>'),
+            maxDate: new Date('<% param.maxDay | dateFormat "yyyy/MM/dd" %>'),
+            defaultDate: new Date('<% param.end | dateFormat "yyyy/MM/dd" %>')
+        });
+    });
+</script>
+
+<form name="dateform" action="<% this.href action="accounting" %>" method="GET">
+    <div class="datepicker" style="float: right; text-align: right;">
+        <div><% message text="Beginn" %>: <input type="text" value="<% param.from default=<% param.minDay | dateFormat "dd.MM.yyyy" %> %>" id="datepickerfrom" name="from" /></div>
+        <div style="margin-top: 8px;"><% message text="Ende" %>: <input type="text" value="<% param.to   default=<% param.maxDay | dateFormat "dd.MM.yyyy" %> %>" id="datepickerto" name="to" /></div>
+    </div>
+
+    <div class="buttons" style="clear: right; float: right; padding-top: 8px;">
+        <button type="submit" value="Submit" class="">
+          <span><span><% message text="Zeitraum anzeigen" %></span></span>
+        </button>
+    </div>
+</form>
+
+<hr style="padding: 25px 0px;"/>
+
+<ul class="list" id="txList">
+    <li style="text-align: left; font-weight: bold;">
+        <div style="float: left; width: 215px;">Datum &amp; Buchungsnr.</div>
+        <div style="float: left; width: 115px; text-align: right;">Nettopreis</div>
+        <div style="float: left; width: 95px;  text-align: right;">Rabatt</div>
+        <div style="float: left; width: 140px; text-align: right; margin-right: 50px;">Bruttopreis</div>
+        Buchungstext
+    </li>
+    <% txlist.render skin="line" %>
+    <li class="listNavigation"><% txlist.prevLink text=<% message text="zurück" %> %><span class="position"><% message text="Seite" %> <% txlist.currentPage %> <% message text="von" %> <% txlist.totalPages %></span><% txlist.nextLink text=<% message text="weiter"%> %></li>
+</ul>
+
+
+<% #addBooking %>
+<a href="<% this.href action='createBooking' %>" class="button" id="createBookingButton sel-user-createBooking"><span><span>&nbsp;&nbsp;<% message text="Buchung durchführen" %>&nbsp;&nbsp;</span></span></a>

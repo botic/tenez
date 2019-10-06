@@ -1,0 +1,88 @@
+<form id="editTimeslot" action="<% this.href action="edit" %>" method="POST" class="form px200">
+
+<% form.init old=<% response.message %> %>
+<% form.messages prefix='<div class="error">' suffix='</div>' %>
+
+<h2><% message text="Zeiteinheit bearbeiten" %> - <% this.court.name %></h2>
+
+<script type="text/javascript">
+    $(function() {
+        $.datepicker.setDefaults($.datepicker.regional['de']);   
+        
+        $("#periodend").datepicker({showOn: 'focus', dateFormat: 'dd.mm.yy', firstDay: 1});
+
+        // Periodend - Value
+        var periodend = getDateFromString('<% form.oldValue name='periodend' default='0' %>');        
+        if(!periodend) {
+            periodend = getDateFromString('<% this.periodend | formatDate %>');
+        }
+        if(periodend) {
+            $("#periodend").datepicker('setDate', periodend); 
+        }
+
+        // Periodend - Min Date
+        var min_date = getDateFromString('<% this.periodstart | formatDate %>');
+        if(new Date() > min_date) {
+            min_date = new Date();
+        }
+        $('#periodend').datepicker('option', 'minDate', min_date);
+    });
+</script>
+
+<!-- Start -->
+<div class="formLine px300 formLineNoInput">
+<div class="label"><% message text="Beginn" %>:</div>
+<div><% this.timestart | formatTime  %> <% message text="Uhr" %></div>
+</div>
+
+<!-- End -->
+<div class="formLine px300 formLineNoInput">
+<div class="label"><% message text="Ende" %>:</div>
+<div><% this.timeend | formatTime action="set2359to2400" %> <% message text="Uhr" %></div>
+</div>
+
+<!-- Slotsize -->
+<div class="formLine px300 formLineNoInput">
+<div class="label"><% message text="Intervall" %>:</div>
+<div><% this.slotsize %> <% message text="Minuten" %></div>
+</div>
+
+<!-- Price -->
+<div class="formLine px300 formLineNoInput">
+<div class="label"><% message text="Preis" %>:</div>
+<div><% this.price | formatMoney %> <% currencyCode %>
+</div>
+
+<!-- Weekdays -->
+<div class="formLine px25 formLineNoInput">
+<div class="label"><% message text="Gültig an" %>:</div>
+<div><% this.daymask | formatDaymaskForDay day="1" text=<% message text="Mo" %> %>
+<% this.daymask | formatDaymaskForDay day="2" text=<% message text="Di" %> %>
+<% this.daymask | formatDaymaskForDay day="3" text=<% message text="Mi" %> %>
+<% this.daymask | formatDaymaskForDay day="4" text=<% message text="Do" %> %>
+<% this.daymask | formatDaymaskForDay day="5" text=<% message text="Fr" %> %>
+<% this.daymask | formatDaymaskForDay day="6" text=<% message text="Sa" %> %>
+<% this.daymask | formatDaymaskForDay day="7" text=<% message text="So" %> %></div>
+</div>
+
+<!-- Period Begin -->
+<div class="formLine px300 formLineNoInput">
+<div class="label"><% message text="Gültigkeit Beginn" %>:</div>
+<div><% this.periodstart | formatDate %></div>
+</div>
+
+<!-- Period End -->
+<div class="formLine px300">
+<label for="periodend"><% message text="Gültigkeit Ende" %>:</label>
+<input type="text" value="<% form.oldValue name='periodend' %>" name="periodend" id="periodend" style="width: 90px;" />
+<% form.add name="periodend" validator="date" required="false" message=<% message text="Ungültiges Gültigkeits-Ende angegeben." %> %> 
+</div>
+
+
+<div class="buttons">
+    <button type="submit" value="Submit" class="submit">
+      <span><span><% message text="Änderung speichern" %></span></span>
+    </button>
+</div>
+
+</form>

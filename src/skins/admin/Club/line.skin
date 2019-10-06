@@ -1,0 +1,4 @@
+<li>
+<div class="linetext"><a href="<% this.href action='main' %>"><% this.name encoding='form' %></a></div>
+<div class="actions""><a href="<% this.href action='edit' %>" class="button" id="sel-editclub-<% this.alias %>"><span><span><% message text="Editieren" %></span></span></a></div>
+</li>

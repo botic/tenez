@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+   <meta charset="utf-8" />
+   <title>Init &ndash; Tenez</title>
+
+   <link rel="icon" type="image/png" href="/static/tenez/frontend/favicon.png" />
+   
+   <link rel="stylesheet" type="text/css" media="all" href="<% staticUrl path="css/main.css" %>" />    
+</head>
+<body>
+
+<div id="init_block">
+    <div id="logo"></div>
+    <div id="text"><% response.show_init_link | boolean true=<% this.renderSkin skin="Root#initAction" %> false=<% message text="Done" %> %></div>
+</div>
+
+</body>
+</html>
+
+
+<% #initAction %>
+<a href="<% this.href action="init" %>"><% message text="Init" %></a>

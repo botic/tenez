@@ -1,0 +1,41 @@
+<h2><% message text="Kundenauswertung für " %><% param.name %></h2>
+
+<div id="printcontrols">
+<form action="<% this.href action='customers' %>" method="GET">
+    <input type="text" value="<% queryParams name='customerquery' %>" name="customerquery" style="width: 170px; margin-right: 15px; float: left;"/>
+
+    <button type="submit" value="Submit" class="button" style="">
+      <span><span><% message text="Filtern" %></span></span>
+    </button>
+</form>
+</div>
+
+<!-- Customers-Infos -->
+<div class="gfx" style="margin-top: 25px;">
+<div id="gfx-root-userlist" style="height: 530px;"></div>
+<script type="text/javascript">
+    var sales = <% param.sales %>;
+    var r = Raphael("gfx-root-userlist");
+
+    r.g.txtattr.font = "12px Arial, sans-serif";
+    r.g.text(115, 10, "Umsatzstärkste Kunden");
+    r.g.piechart(115, 140, 115, sales[0], {
+        legend: <% param.saleslegend %>,
+        legendpos: "east"
+    });
+
+    var rescount  = <% param.rescount %>;
+    r.g.text(115, 285, "Meisten Reservierungen");
+    r.g.piechart(115, 415, 115, rescount[0], {
+        legend: <% param.rescountlegend %>,
+        legendpos: "east",
+        colors: ["#87bf7c", "#7cbfbb", "#ac996b", "#b98d7e", "#a47eb9"]
+    });
+</script>
+</div>
+
+<hr/>
+
+<% #empty %>
+<h2><% message text="Zu wenige Kundendaten" %></h2>
+<p><% message text="Bisher wurden noch zu wenige Kunden bzw. Transaktionen angelegt." %></p>

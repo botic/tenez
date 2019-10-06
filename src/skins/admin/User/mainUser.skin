@@ -1,0 +1,122 @@
+<h1><% this.fullname encoding='form' %> – <% this.username encoding='form' %></h1>
+
+<table id="usermain">
+    <tr style="font-weight: bold;">
+        <td><% message text="Passwort" %>:</td>
+        <td><% this.password encoding='form' %></td>
+    </tr>
+    <tr>
+        <td><% message text="E-Mail" %>:</td>
+        <td><% this.contact.hasEmail | boolean true=<% this.contact.email %> encoding='form' %></td>
+    </tr>
+    <tr>
+        <td style="vertical-align: top;"><% message text="Kundengruppen" %>:</td>
+        <td><% this.userGroupCheckbox disabled="disabled" %></td>
+    </tr>
+</table>
+<table id="usercontact">
+<tr>
+        <td><% message text="Firma" %>:</td>
+        <td><% this.company encoding='form' %> <% this.iscompany | boolean true=<% message text="(Firmenkunde)" %> %></td>
+    </tr>
+    <tr>
+        <td><% message text="Straße" %>:</td>
+        <td><% this.contact.street encoding='form' %><% this.contact.street2 prefix="<br/>" encoding='form' %></td>
+    </tr>
+    <tr>
+        <td><% message text="PLZ / Ort" %>:</td>
+        <td><% this.contact.city.zip failmode='silent' encoding='form' %><% this.contact.city.name failmode='silent' prefix=" &ndash; " encoding='form' %></td>
+    </tr>
+    <tr>
+        <td><% message text="Land" %>:</td>
+        <td><% this.contact.country failmode='silent' encoding='form' %></td>
+    </tr>
+    <tr>
+        <td><% message text="Telefonnummer" %>:</td>
+        <td><% this.contact.phone encoding='form' %></td>
+    </tr>
+    <tr>
+        <td><% message text="Faxnummer" %>:</td>
+        <td><% this.contact.fax encoding='form' %></td>
+    </tr>
+    <tr>
+        <td><% message text="Webseite" %>:</td>
+        <td><% this.contact.url encoding='form' %></td>
+    </tr>
+</table>
+
+<hr/>
+
+<h3 style="margin-top: 25px;"><% message text="Kontostand" %>: <% this.balance | formatMoney %> <% currencyCode %></h3>
+<input id="gfx-param-username"  type="hidden" value="<% this.username encoding='form' %>"/>
+
+
+<script type="text/javascript">
+    $("#gfx-user").ready(function() {
+        var total = ($("#gfx-share-param-totalCount").val() - $("#gfx-share-param-userCount").val()) / 100;
+        var byUser = $("#gfx-share-param-userCount").val() / 100;
+
+        var r = Raphael("gfx-user");
+        r.g.txtattr.font = "12px sans-serif";
+        if (total > 0) {
+            r.g.piechart(90, 90, 90, [byUser, total], {legend: ["%%.%% – Eigene Reservierung", "%%.%% – Von anderen Kunden"], legendpos: "east"});
+        }
+
+        var total2 = $("#gfx-earnings-param-totalCount").val() - $("#gfx-earnings-param-userCount").val() / 100;
+        var byUser2 = $("#gfx-earnings-param-userCount").val() / 100;
+
+        if (total > 0) {
+            r.g.piechart(580, 90, 90, [byUser2, total2], {legend: ["%%.%% – Einnahmen durch " + $("#gfx-param-username").val() + ": " + Math.floor(byUser * 100) + " EUR", "%%.%% – Restliche Einnahmen: " + Math.floor(total * 100) + " EUR"], legendpos: "east"});
+        }
+    });    
+</script>
+
+<!-- Reservations -->
+<div class="gfx">
+<div id="gfx-user" style="height: 200px; margin-top: 25px;" class="itemcount<% this.balance | equals value='0' | boolean true='0' false='NotNull' %>"></div>
+    
+<input id="gfx-share-param-totalCount" type="hidden" value="<% this.club.reports.totalReservationCount %>"/>
+<input id="gfx-share-param-userCount"  type="hidden" value="<% this.reservations.size %>"/>
+<input id="gfx-earnings-param-totalCount" type="hidden" value="<% this.club.reports.totalEarnings %>"/>
+<input id="gfx-earnings-param-userCount"  type="hidden" value="<% this.credits %>"/>
+</div>
+
+<% #sysadmin %>
+<h1><% this.fullname encoding='form' %> – <% this.username encoding='form' %></h1>
+
+<table id="usermain">
+    <tr>
+        <td><% message text="E-Mail" %>:</td>
+        <td><% this.contact.hasEmail | boolean true=<% this.contact.email %> | escapeHtml %></td>
+    </tr>
+    <tr>
+        <td><% message text="Firma" %>:</td>
+        <td><% this.company encoding='form' %> <% this.iscompany | boolean true=<% message text="(Firmenkunde)" %> %></td>
+    </tr>
+    <tr>
+        <td><% message text="Straße" %>:</td>
+        <td><% this.contact.street encoding='form' %><% this.contact.street2 prefix="<br/>" encoding='form' %></td>
+    </tr>
+    <tr>
+        <td><% message text="PLZ / Ort" %>:</td>
+        <td><% this.contact.city.zip failmode='silent' encoding='form' %><% this.contact.city.name failmode='silent' prefix=" &ndash; " encoding='form' %></td>
+    </tr>
+    <tr>
+        <td><% message text="Land" %>:</td>
+        <td><% this.contact.country failmode='silent' encoding='form' %></td>
+    </tr>
+    <tr>
+        <td><% message text="Telefonnummer" %>:</td>
+        <td><% this.contact.phone encoding='form' %></td>
+    </tr>
+    <tr>
+        <td><% message text="Faxnummer" %>:</td>
+        <td><% this.contact.fax encoding='form' %></td>
+    </tr>
+    <tr>
+        <td><% message text="Webseite" %>:</td>
+        <td><% this.contact.url encoding='form' %></td>
+    </tr>
+</table>
+
+<hr/>

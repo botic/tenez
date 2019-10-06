@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+   <meta charset="utf-8" />
+   <title>
+      <% response.title %> - <% club.name %> &ndash; powered by Tenez
+   </title>
+
+   <link rel="icon" type="image/png" href="<% staticUrl path='favicon.png' %>" />
+
+   <script type="text/javascript" src="<% staticUrl path="js/jquery-1.3.2.min.js" %>"></script>
+   <script type="text/javascript" src="<% staticUrl path="js/jquery-ui-1.7.2.custom.min.js" %>"></script>
+   <script type="text/javascript" src="<% staticUrl path="js/jquery.autocomplete.min.js" %>"></script>
+   <script type="text/javascript" src="<% staticUrl path="js/ui.datepicker-de.js" %>"></script>
+
+   <script type="text/javascript" src="<% staticUrl path="js/main.js" %>"></script>
+
+   <link rel="stylesheet" type="text/css" media="all" href="<% staticUrl path="css/main-mobile.css" %>" />
+   <link rel="stylesheet" type="text/css" media="all" href="<% staticUrl path="css/form-mobile.css" %>" />
+   <link rel="stylesheet" type="text/css" href="<% staticUrl path="css/smoothness/jquery-ui-1.7.2.custom.css" %>" media="screen" />
+   
+   <meta name="viewport" content="width=320; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
+</head>
+<body>
+<div id="wrapper">
+
+    <div id="header"></div>
+    <div id="navigation">
+        <ul id="level1">
+            <% club.renderLocations %>
+            <% signout skin="signoutUser" %>
+        </ul>
+    </div>
+
+    <div id="content">
+    <% response.body %>
+    </div>
+
+    <div id="footer">
+        &copy; 2010 Tenez.at
+    </div>
+</div>
+
+</body>
+</html>
+
+<% #notfound %>
+<h1><% message text="Ups!" %></h1>
+<p><% message text="Für die angegebene URL wurde keine entsprechende Aktion gefunden." %></p>

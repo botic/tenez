@@ -1,0 +1,27 @@
+<h2><% message text="Standortverwaltung" %></h2>
+
+<% locationlist.totalPages | switch 0=<% message text="Noch keine Standorte angelegt."%> %>
+
+<input type="hidden" name="apiurl" id="apiurl" value="<% this.href action='saveLocationOrder' %>" />
+<ul class="list itemcount<% locationlist.totalPages %>" id="locationList">
+    <% locationlist.render skin="line" %>
+</ul>
+
+<% adminuser.hasPermission name="can_add_locations" | boolean true=<% this.renderSkin skin="listLocations#create" %> %>
+
+<hr/>
+
+<% adminuser.isSysAdmin | boolean true=<% this.renderSkin skin="listLocations#deactivated"%> %>
+
+<% #deactivated %>
+<h3 class="itemcount<% deactivatedlocationlist.totalPages %>"><% message text="Deaktivierte Standorte" %></h3>
+<ul class="list itemcount<% deactivatedlocationlist.totalPages %>" id="locationListDeactivated" style="width: 500px;">
+    <% deactivatedlocationlist.render skin="line#deactivated" %>
+</ul>
+
+<hr />
+
+<% #create %>
+<div id="createLocationButton" class="itemcount<% locationlist.totalPages %>">
+<a href="<% this.href action='createLocation' %>" class="button" style="font-weight: bold;"><span><span><% message text="Standort hinzufügen" %></span></span></a>
+</div>

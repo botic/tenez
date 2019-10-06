@@ -1,0 +1,8 @@
+<h2><% this.name %> - <% message text="Kunden" %></h2>
+
+<%userlist.totalPages | switch 0=<% message text="Noch keine Kunden zugeordnet."%> %>
+
+<ul class="list itemcount<% userlist.totalPages %>" id="userList">
+    <% userlist.render skin="line" %>
+    <li class="listNavigation"><% userlist.prevLink text=<% message text="zurück" %> %><span class="position"><% message text="Seite" %> <% userlist.currentPage %> <% message text="von" %> <% userlist.totalPages %></span><% userlist.nextLink text=<% message text="weiter"%> %></li>
+</ul>

@@ -1,0 +1,31 @@
+<li class="<% this.active | boolean false='inactiveUserLine' %>">
+<div class="linetext"><a href="<% this.href action='main' %>"><% this.fullname | truncate limit="22" clipping="..." | escapeHtml %> (<% this.username encoding='form' %>)</a></div>
+<div class="actions">
+<% this.active | boolean true=<% this.renderSkin skin='line#active' %> false=<% this.renderSkin skin='line#notactive' %> %>
+</div>
+</li>
+
+<% #active %>
+<% adminuser.hasPermission name="can_edit_users" | boolean true=<% this.renderSkin skin="line#editAction" %> %>
+<% adminuser.hasPermission name="can_view_bookings" | boolean true=<% this.renderSkin skin="line#accountingAction" %> %>
+
+<% #notactive %>
+<% adminuser.hasPermission name="can_edit_users" | boolean true=<% this.renderSkin skin="line#activate" %> %>
+
+<% #activate %>
+<a href="<% this.href action='activate' %>" class="button" id="sel-activate-<% this.username %>"><span><span><% message text="Aktivieren" %></span></span></a>
+
+<% #editAction %>
+<a href="<% this.href action='edit' %>" class="button" id="sel-edit-<% this.username %>"><span><span><% message text="Editieren" %></span></span></a>
+
+<% #accountingAction %>
+<a href="<% this.href action='accounting' %>" class="button" id="sel-accounting-<% this.username %>"><span><span><% adminuser.hasPermission name="can_add_bookings" | boolean true=<% message text="Konto &amp; Buchen" %> false=<% message text="Kontostand" %> %></span></span></a>
+
+<% #sysadmin %>
+<li>
+<div class="linetext"><a href="<% this.href action='main' %>"><% this.fullname encoding='form' %> (<% this.username encoding='form' %>)</a></div>
+<div class="actions">
+    <% adminuser.hasPermission name="can_edit_users" | boolean true=<% this.renderSkin skin="line#editAction" %> %>
+    <% adminuser.hasPermission name="can_delete_users" | boolean true=<% this.renderSkin skin="line#deleteAction" %> %>
+</div>
+</li>

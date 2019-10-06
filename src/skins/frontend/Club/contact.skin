@@ -1,0 +1,55 @@
+<div class="contactClub">
+
+<form id="contactClub" action="<% this.href action="contact" %>" method="POST" class="form px140">
+
+<% form.init old=<% response.message %> %>
+<% form.messages prefix='<div class="error">' suffix='</div>' %>
+
+
+<h2><% message text="Verein kontaktieren" %> &ndash; <% this.name encoding='all' %></h2>
+
+<!-- Name -->
+<div class="formLine">
+<label for="name"><% message text="Name:" %></label>
+<input type="text" value="<% form.oldValue name='name' encoding='all' %>" name="name" style='width: 300px;' />
+<% form.add name="name" %>
+
+</div>
+
+<!-- E-Mail -->
+<div class="formLine">
+<label for="email"><% message text="E-Mail-Adresse:" %></label>
+<input type="text" value="<% form.oldValue name='email' encoding='all' %>" name="email" style='width: 300px;' />
+<% form.add name="email" validator='email' message=<% message text="Bitte geben Sie eine korrekte E-Mail-Adresse an!" %> %>
+</div>
+
+<!-- Subject -->
+<div class="formLine">
+<label for="subject"><% message text="Betreff:" %></label>
+<input type="text" value="<% form.oldValue name='subject' encoding='all' %>" name="subject" style='width: 300px;' />
+<% form.add name="subject" %>
+</div>
+
+<!-- Text -->
+<div class="formLine">
+<label for="text"><% message text="Nachricht:" %></label>
+<textarea name="text" style="width: 442px; height: 145px;"><% form.oldValue name='text' encoding='form' %></textarea>
+<% form.add name="text" %>
+</div>
+
+<div class="buttons">
+    <button type="submit" value="Submit" class="submit" id="sel-contact">
+      <span><span>&nbsp;&nbsp;<% message text="Senden" %>&nbsp;&nbsp;</span></span>
+    </button>
+</div>
+</form>
+</div>
+
+
+
+<% #success %>
+<h2><% this.name %></h2>
+
+<p><% message text="Nachricht wurde erfolgreich versendet!" %></p>
+
+<a href="<% this.href action="signin" %>" class="button"><span><span><% message text="Zurück zur Anmeldung" %></span></span></a>

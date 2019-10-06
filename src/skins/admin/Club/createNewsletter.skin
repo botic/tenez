@@ -1,0 +1,43 @@
+<form id="newsletter" action="<% this.href action="createNewsletter" %>" method="POST" class="form px200">
+
+<%// Init the new form and, if available, also get the previously submitted one %>
+<% form.init old=<% response.message %> %>
+
+<%// Display the error messages %>
+<% form.messages prefix='<div class="error">' suffix='</div>' %>
+
+<h2><% message text="Newsletter senden" %></h2>
+
+<!-- AllMembers -->
+<div class="formLine px300">
+<fieldset>
+<legend><% message text="Empfänger" %>:<span class="formRequired">*</span></legend>
+<div class="checkboxGroup" id="receivers">
+    <div class="checkboxLine"><input type="checkbox" name="allmembers" id="allmembers" value="true" class="checkboxInput usergroup" /><label for="allmembers" class="forinput"><% message text="Alle Kunden" %></label></div>
+    <div id="fx-cbg"><% this.userGroupCheckbox class="usergroup" name="usergroup" %></div>
+</div>
+</fieldset>
+</div>
+
+<!-- Header -->
+<div class="formLine px300">
+<label for="header"><% message text="Betreff" %>:<span class="formRequired">*</span></label>
+<input type="text" value="<% form.oldValue name='header' encoding='form' %>" name="header" style="width: 520px;"/>
+<% form.add name="header" required="true" missing=<% message text="Kein Betreff angegeben." %> %>
+</div>
+
+<!-- Textarea -->
+<div class="formLine px300">
+<label for="textarea"><%message text="Text" %>:<span class="formRequired">*</span></label>
+<textarea style="width: 530px; height: 210px; font-size: 0.8em;" name="textarea" ><% form.oldValue name='textarea' encoding='form' %></textarea>
+<% form.add name="textarea" required="true" missing=<% message text="Keine Nachricht angegeben." %> %>
+</div>
+
+<div class="buttons">
+    <button type="submit" value="Submit" class="submit">
+      <span><span>&nbsp;<% message text="Newsletter versenden" %></span></span>
+    </button>
+</div>
+
+</form>
+

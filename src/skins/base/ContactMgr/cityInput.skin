@@ -1,0 +1,16 @@
+<input type="hidden" name="apiurl" id="apiurl" value="<% root.href %>" />
+<!-- country -->
+<div class="formLine px300">
+<label for="country"><% message text="Land:" %></label>
+<% root.addresses.countryDropdown name="country" id="country" selected=<% form.oldValue name='country' %> %>
+<% form.add name="country" %>
+</div>
+
+<!-- city -->
+<div class="formLine px300 sel-cityinput">
+<label for="city"><% message text="PLZ/Stadt:" %></label>
+<input type="text" value="" name="city" class="zipcityautocomplete" />
+<% form.add name="city" %>
+<input type="hidden" value="<% form.oldValue name='zipcityvalue' default=<% param.city default='-1' %> %>" name="zipcityvalue" id="zipcityvalue"/>
+<% form.add name="zipcityvalue" %>
+</div>

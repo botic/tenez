@@ -1,0 +1,28 @@
+<script type="text/javascript">
+$(document).ready(function() {
+		$('.hideInfo').hide();
+		
+		$('a.fx-showReceivers').click(function(){
+			$("#" + $(this).attr('rel')).show();
+            $(this).hide();            
+			return false;
+		});
+});
+</script>
+
+<h2><% message text="Newsletter" %></h2>
+
+<ul class="list itemcount<% newsletterlist.totalPages %>" id="newsletterlist">
+    <% newsletterlist.render skin="line" %>
+    <li class="listNavigation"><% newsletterlist.prevLink text=<% message text="zurück" %> %><span class="position"><% newsletterlist.currentPage %> <% message text="von" %> <% newsletterlist.totalPages %></span><% newsletterlist.nextLink text=<% message text="weiter"%> %></li> 
+</ul>
+
+<% adminuser.hasPermission name="can_send_newsletters" | boolean true=<% this.renderSkin skin="listNewsletters#create" %> %>
+
+<hr />
+
+<% #create %>
+<div id="createNewsletterButton" class="itemcount<% newsletterlist.totalPages %>">
+<a href="<% this.href action='createNewsletter' %>" class="button" style="font-weight: bold;"><span><span><% message text="Neuen Newsletter erstellen" %></span></span></a>
+</div>
+

@@ -1,0 +1,35 @@
+<form id="createCourt" action="<% this.href action="createCourt" %>" method="POST" class="form px200">
+
+<% form.init old=<% response.message %> %>
+<% form.messages prefix='<div class="error">' suffix='</div>' %>
+
+<h2><% message text="Platz hinzufügen" %></h2>
+
+<!-- Name -->
+<div class="formLine px300">
+<label for="name"><% message text="Name" %>:<span class="formRequired">*</span></label>
+<input type="text" value="<% form.oldValue name='name' encoding='form' %>" name="name" autocomplete="off" />
+<% form.add name="name" required="true" missing=<% message text="Kein Name angegeben." %> %>
+</div>
+
+<!-- Alias -->
+<div class="formLine px300">
+<label for="alias"><% message text="Alias" %>:<span class="formRequired">*</span></label>
+<input type="text" value="<% form.oldValue name='alias' encoding='form' %>" name="alias" autocomplete="off" />
+<% form.add name="alias" validator="alias" required="true" message=<% message text="Ungültiger Alias angegeben." %> missing=<% message text="Kein Alias angegeben." %> %>
+</div>
+
+<!-- Description -->
+<div class="formLine px300">
+<label for="description"><% message text="Beschreibung:" %></label>
+<input type="text" value="<% form.oldValue name='description' encoding='form' %>" name="description" />
+</div>
+
+
+<div class="buttons">
+    <button type="submit" value="Submit" class="submit">
+      <span><span><% message text="Platz hinzufügen" %></span></span>
+    </button>
+</div>
+
+</form>

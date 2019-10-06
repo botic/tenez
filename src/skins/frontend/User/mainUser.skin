@@ -1,0 +1,37 @@
+<h2><% this.fullname encoding='form' %></h2>
+
+<% this.contact.hasEmail | boolean false=<% this.renderSkin skin="mainUser#noEmail" %> %>
+
+<h3 id="customerBalance"><% message text="Kontostand" %>: <% currencySymbol %> <% this.balance | formatMoney %></h3>
+
+<div id="lastTransactions" class="itemcount<% txlist.totalPages %>">
+<table>
+    <colgroup>
+        <col width="105px" />
+        <col width="100px" />
+        <col width="120px" />
+        <col width="90px" />
+        <col width="120px" />
+        <col width="435px" />
+    </colgroup>
+    <tr>
+        <th>Datum</th>
+        <th>Buchung</th>
+        <th style="text-align: right;">Wert</th></th>
+        <th style="text-align: right;">Rabatt</th>
+        <th style="text-align: right;">Betrag</th>
+        <th style="text-align: left; padding-left: 25px;">Buchungstext</th>
+    </tr>
+    <% txlist.render skin="line" %>
+</table>
+<ul class="list">
+    <li class="listNavigation"><% txlist.prevLink text=<% message text="zurück" %> %><span class="position"><% message text="Seite" %> <% txlist.currentPage %> <% message text="von" %> <% txlist.totalPages %></span><% txlist.nextLink text=<% message text="weiter"%> %></li>
+</ul>
+</div>
+
+<small><% message text="Letzter Login" %>:&nbsp;&nbsp;&nbsp;<% this.lastlogin | dateFormat "dd.MM.yyyy '&ndash;' HH:mm" %> <% message text="Uhr" %></small>
+
+<% #noEmail %>
+<div id="noEmailWarning">
+<span class="error"><% message text="Sie haben bisher noch keine E-Mail-Adresse hinterlegt!" %></span><br/><% this.href action="edit" | link text=<% message text="E-Mail-Adresse eintragen" %> %>
+</div>

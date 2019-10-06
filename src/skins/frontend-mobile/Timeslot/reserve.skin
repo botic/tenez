@@ -1,0 +1,47 @@
+<input type="hidden" name="apiurl" id="apiurl" value="<% root.href %>" />
+        
+<form id="reserve" action="<% this.href action="reserve" %>" method="POST" class="form px200 reservationFrontend">
+
+<% form.init old=<% response.message %> %>
+<% form.messages prefix='<div class="error">' suffix='</div>' %>
+
+<h2><% message text="Reservieren" %></h2>
+
+<!-- Court, Location --> 
+<div class="formLine px300 formLineNoInput">
+<div class="label"><% message text="Platz" %>:</div>
+<div><% this.court.name %> (<% this.court.location.name%>)</div>
+</div>
+
+<!-- Day --> 
+<div class="formLine px300 formLineNoInput">
+<div class="label"><% message text="Datum" %>:</div>
+<div><% response.timestart | formatWeekday %>, <% response.timestart | formatDate %></div>
+</div>
+
+<!-- Time --> 
+<div class="formLine px300 formLineNoInput">
+<div class="label"><% message text="Zeit" %>:</div>
+<div><% response.timestart | formatTime %> - <% response.timeend | formatTime action="set2359to2400" %> <% message text="Uhr" %></div>
+<input type="hidden" name="start" value="<% response.start %>" />
+<% form.add name="start" validator="integer" required="true" message=<% message text="Ungültiger Start angegeben." %> missing=<% message text="Kein Start angegeben." %> %>
+</div>
+
+<!-- Price --> 
+<div class="formLine px300 formLineNoInput">
+<div class="label"><% message text="Preis" %>:</div>
+<div><% response.price | formatMoney %> <% currencyCode %> <% response.discount | equals value=0 | boolean false=<% this.renderSkin skin="reserve#discount" %> %></div>
+</div>
+
+<p id="buttons">
+    <button type="submit" value="Submit" class="submit" id="sel-createreservation">
+      <span><span><% message text="Reservieren" %></span></span>
+    </button>
+    <a href="<% this.court.location.href action="" %>?day=<% response.timestart | formatDate %>" class="button cancel" style="margin-left: 15px; font-weight: bold;" id="sel-cancel"><span><span><% message text="Abbrechen" %></span></span></a>
+</p>
+
+</form>
+
+
+<% #discount %>
+(<% message text="inkl." %> <% response.discount | toPercent | formatMoney %>% <% message text="Rabatt" %>)

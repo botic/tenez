@@ -1,0 +1,100 @@
+<form id="registerCustomer" action="<% this.href action="register" %>" method="POST" class="form px200">
+
+<%// Init the new form and, if available, also get the previously submitted one %>
+<% form.init old=<% response.message %> %>
+
+<%// Display the error messages %>
+<% form.messages prefix='<div class="error">' suffix='</div>' %>
+
+<h2><% message text="Registrieren" %> &ndash; <% club.name encoding='form' %></h2>
+
+<!-- Titel -->
+<div class="formLine px300">
+<label for="title"><% message text="Titel:" %></label>
+<input type="text" value="<% form.oldValue name='title' encoding='form' %>" name="title" style="width: 190px;" />
+<% form.add name="title" %>
+</div>
+
+<!-- Firstname -->
+<div class="formLine px300">
+<label for="firstname"><% message text="Vorname:" %></label>
+<input type="text" value="<% form.oldValue name='firstname' encoding='form' %>" name="firstname" />
+<% form.add name="firstname" required="true" missing=<% message text="Sie müssen einen Vornamen angeben!" %> %>
+</div>
+
+<!-- Lastname -->
+<div class="formLine px300">
+<label for="lastname"><% message text="Nachname:" %></label>
+<input type="text" value="<% form.oldValue name='lastname' encoding='form' %>" name="lastname" />
+<% form.add name="lastname" required="true" missing=<% message text="Sie müssen einen Nachnamen angeben!" %> %>
+</div>
+
+<!-- email -->
+<div class="formLine px300">
+<label for="email"><% message text="E-Mail:" %></label>
+<input type="text" value="<% form.oldValue name='email' encoding='form' %>" name="email" />
+<% form.add name="email" validator="email" message=<% message text="Bitte geben sie eine korrekte E-Mail Adresse ein" %> required="true" missing=<% message text="Sie müssen bei einer Online-Registrierung eine E-Mail-Adresse angeben! Sollten Sie keine E-Mail-Adresse besitzen, wenden Sie sich an den Administrator." %> %>
+</div>
+
+<h3><% message text="Optionale Angaben" %></h3>
+
+<!-- Company -->
+<div class="formLine px300">
+<label for="company"><% message text="Firma:" %></label>
+<input type="text" value="<% form.oldValue name='company' encoding='form' %>" name="company" />
+<% form.add name="company" %>
+</div>
+
+<!-- Is Company -->
+<div class="formLine">
+<input type="checkbox" name="iscompany" id="iscompany" value="true" style="width: auto; margin-left: 200px;" />
+<label for="iscompany" style="width: auto; float: none; top: 1px; position: relative; left: 3px;"><% message text="Firmenanschrift verwenden" %></label>
+<% form.add name="iscompany" %>
+</div>
+
+<!-- street -->
+<div class="formLine px300">
+<label for="street"><% message text="Strasse:" %></label>
+<input type="text" value="<% form.oldValue name='street' encoding='form' %>" name="street" />
+<% form.add name="street" %>
+</div>
+
+<!-- street2 -->
+<div class="formLine px300">
+<label for="street2"></label>
+<input type="text" value="<% form.oldValue name='street2' encoding='form' %>" name="street2" />
+<% form.add name="street2" %>
+</div>
+
+<!-- City Input -->
+<% root.addresses.renderCityInput %>
+
+<!-- phone -->
+<div class="formLine px300">
+<label for="phone"><% message text="Telefonnummer:" %></label>
+<input type="text" value="<% form.oldValue name='phone' encoding='form' %>" name="phone" />
+<% form.add name="phone" validator="phone" message=<% message text="Bitte geben sie eine korrekte Telefonnummer an!" %> %>
+</div>
+
+
+<!-- fax -->
+<div class="formLine px300">
+<label for="fax"><% message text="Faxnummmer:" %></label>
+<input type="text" value="<% form.oldValue name='fax' encoding='form' %>" name="fax" />
+<% form.add name="fax" validator="phone" message=<% message text="Bitte geben sie eine korrekte Faxnummer an!" %> %>
+</div>
+
+<!-- url -->
+<div class="formLine px300">
+<label for="url"><% message text="Webseite:" %></label>
+<input type="text" value="<% form.oldValue name='url' encoding='form' %>" name="url" />
+<% form.add name="url" validator="url" message=<% message text="Ungültige URL eingegeben!"%> %>
+</div>
+
+<div class="buttons" style="margin-left: 200px;">
+    <button type="submit" value="Submit" class="submit" id="sel-createcustomer">
+      <span><span><% message text="Registrierung senden" %></span></span>
+    </button>
+</div>
+
+</form>

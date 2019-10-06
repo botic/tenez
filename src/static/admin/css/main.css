@@ -1,0 +1,873 @@
+/*
+Copyright (c) 2009, Yahoo! Inc. All rights reserved.
+Code licensed under the BSD License:
+http://developer.yahoo.net/yui/license.txt
+version: 3.0.0
+build: 1549
+*/
+html{color:#000;background:#FFF;}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0;}table{border-collapse:collapse;border-spacing:0;}fieldset,img{border:0;}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal;}li{list-style:none;}caption,th{text-align:left;}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}q:before,q:after{content:'';}abbr,acronym{border:0;font-variant:normal;}sup{vertical-align:text-top;}sub{vertical-align:text-bottom;}input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit;}input,textarea,select{*font-size:100%;}legend{color:#000;}
+
+/***************
+ *   Tenez     *
+ ***************/
+
+body {
+    font-family: Arial, Verdana;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-size: 24px;
+    margin: 8px 0px 14px 0px;
+}
+
+h3 {
+    font-size: 20px;
+    margin-top: 12px;
+}
+
+p {
+    line-height: 1.5em;
+    margin: 0.8em 0em;
+}
+
+strong, .strong {
+    font-weight: bold;
+}
+
+hr {
+    clear: both;
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+}
+
+.hidden {
+    display: none;
+}
+
+.clear {
+    clear: both;
+}
+
+table#appstats {
+    float: left;
+}
+
+table#appstats td,
+table#runtimeinfo td,
+table.newsletterinfo td {
+    padding: 4px 2px;
+}
+
+#newsletterlist.list li {
+    clear: none;
+    float: none;
+    height: inherit;
+}
+
+table tr.alert {
+    color: #ffffff;
+    background: #F00000;
+    font-weight: bold;
+    border: 4px solid #F0F000;
+    text-align: center;
+}
+
+#wrapper {
+    width: 1021px;
+    margin: 0px auto;
+}
+
+#navigation {
+    background: url('../images/header_background.png') no-repeat;
+    width: 100%;
+    position: relative;
+}
+
+#navigation ul#level1 {
+    margin: 0px 0px 0px 195px;
+    color: #fdfdfd;
+    font-size: 20px;
+    letter-spacing: 1px;
+    height: 73px;
+    padding-top: 15px;
+}
+
+
+#navigation ul#level1 li.toppoint.noaccess {
+    display: none;                             
+}
+
+#navigation ul#level1 li.toppoint {
+    float: left;
+    margin-left: 65px;
+    position: relative;
+    height: 45px;
+    padding: 5px;
+    z-index: 100;
+}
+
+#navigation ul#level1 ul {
+    display: none;
+}
+
+#navigation ul#level1 li.access:hover,
+#navigation ul#level1 li.access:focus {
+    color: #c5a861;
+    cursor: pointer;
+}
+
+#navigation ul#level1 li.access:focus ul,
+#navigation ul#level1 li.access:hover ul {
+    display: block;
+    position: absolute;
+    top: 45px;
+    left: 0px;
+    background: rgb(38, 56, 80);
+    background: rgba(38, 56, 80, 0.85);
+    -moz-border-radius: 7px;
+    -webkit-border-radius: 7px;
+    border-radius: 7px;
+    font-size: 16px;
+    padding: 5px 8px;
+}
+
+#navigation ul#level1 li.toppoint li {
+    padding: 5px 5px;
+    width: 175px;
+}
+
+#navigation a {
+    color: #f0f0f0;
+    text-decoration: none;
+}
+
+#navigation a:hover,
+#navigation a:focus {
+    color: #d8af4c;
+    text-decoration: none;
+}
+
+#navigation #signout {
+    position: absolute;
+    background: #edf0f4;
+    top: 5px;
+    left: 23px;
+    width: 175px;
+    height: 52px;
+    font-size: 14px;
+}
+
+#navigation #signout p {
+    color: #263750;
+    margin: 0px 0px;
+    line-height: 1.2em;
+}
+
+#navigation #signout p.fullname {
+    font-size: 10px;
+    margin-bottom: 5px;
+    padding-bottom: 3px;
+    border-bottom: 1px solid #96a1b0;
+    width: 100%;
+}
+
+#navigation #signout p.sysadmin {
+    font-size: 12px;
+    margin-top: 7px;
+}
+
+
+#navigation #signout a {
+    color: #8395a6;
+}
+
+#navigation #signout a:hover,
+#navigation #signout a:focus {
+    color: #d34524;
+}
+
+#navigation #signout a.signout {
+    float: right;
+}
+
+#content {
+    padding: 10px 25px;
+}
+
+#content .loginmask {
+    float: left;
+    width: 50%;
+    border-right: 1px solid #96a1b0;
+}
+
+#content .loginhint {
+    float: right;
+    width: 43%;
+    padding-left: 5%;
+}
+
+#footer {
+    clear: both;
+    border-top: 1px solid #96a1b0;
+    margin-top: 40px;
+    color: #8d9eb8;
+    padding: 7px 25px;
+    font-size: 12px;
+}
+
+#content a {
+    color: #466793;
+    text-decoration: none;
+}
+
+#content a:hover {
+    color: #0c1e44;
+}
+
+a.button {
+    color: #252a36 !important;
+}
+
+.handle { float: left; margin-right: 10px; cursor: move; }
+.fx-dragging {
+    border: 1px solid #e7e67a;
+}
+
+.error {
+    padding-bottom: 10px;
+    color: #DE6C75;
+}
+
+/*********************************************
+ **
+ ** Timeslots
+ ** 
+ *********************************************/ 
+
+#content .datepicker {
+    float: right;
+}
+
+#content .datepicker {
+    float: right;
+    color: #1e2840;
+}
+
+#content .datepicker .back {
+    float: left; 
+    padding-top: 8px;
+    padding-right: 20px; 
+    font-size: 30px;
+}
+
+#content .datepicker .day {
+    float: left; 
+    text-align: center;
+}
+#content .datepicker .day .weekday {
+    font-size: 18px;
+}
+
+#content .datepicker .input {
+    width:100px; 
+    text-align: center; 
+    margin-top: 10px;
+}
+
+#content .datepicker .forward {
+    float: left; 
+    padding-top: 8px;
+    padding-left: 20px; 
+    font-size: 30px;
+}
+
+#content .datepicker .today {
+    clear: both;
+    padding-top: 6px;
+}
+
+#content .datepicker .today a.button {
+    margin-left: 56px;
+}
+
+#content .timetables {
+
+}
+
+#content .timetables .timetable {
+    float: left;
+    margin: 0px 25px;
+}
+
+#content .timetables .timetable h2 {
+    text-align: center;
+    font-size: 22px;
+}
+
+#content .timetables .timetable .timetableItem {
+    width: 270px;
+    height: 35px;
+    margin-bottom: 2px;
+    text-align: center;
+    padding-top: 5px;
+    font-size: 14px;
+    color: #40424C;
+    position: relative;
+}
+
+#content .timetables .timetable .timetableItem a {
+    color: #000000;   
+    text-decoration: none;
+}
+
+#content .timetables .timetable .timetableItem .price {
+    font-size: 11px;
+    position: absolute;
+    top:  8px;
+    left: 214px;
+    width: 50px;
+    text-align: right;
+}
+
+#content .timetables .timetable .timetableItem .tslabel {
+    position: absolute;
+    top: 12px;
+    left: 50px;
+    width: 180px;
+    height: 18px;
+    overflow: hidden;
+}
+
+#content .timetables .timetable .timetableItem .time.start {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    font-weight: bold;
+}
+
+#content .timetables .timetable .timetableItem .time.end {
+    position: absolute;
+    top: 22px;
+    left: 8px;
+    font-weight: normal;
+    font-size: 10px;
+    color: #444;
+}
+
+#content .timetables .timetable .timetableItem.free {
+    background-color: #B5EE8D;
+}
+
+#content .timetables .timetable .timetableItem.free:hover,
+#content .timetables .timetable .timetableItem.free:focus {
+    background-color: #9FE66C;
+}
+
+
+#content .timetables .timetable .timetableItem.reserved {
+    background-color: #FBAEB4;
+}
+
+#content .timetables .timetable .timetableItem.reserved:hover,
+#content .timetables .timetable .timetableItem.reserved:focus {
+    background-color: #FF9199;
+}
+
+#content .timetables .timetable .timetableItem.reserved .price .org {
+    text-decoration: line-through;
+}
+
+/*********************************************
+ **
+ ** ListRenderer
+ **
+ *********************************************/
+
+.itemcount0 {
+    display: none;
+}
+
+.list li {
+    clear: both;
+    height: 32px;
+    padding-top: 7px;
+}
+
+.list li div.actions {
+    float: right;
+    text-align: right;
+}
+
+.list li .linetext {
+    float: left;
+}
+
+.list li.listNavigation {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid #96a1b0;
+    text-align: center;    
+}
+
+.list li.listNavigation span.position {
+    margin: 0px 20px;    
+}
+
+#clubList, #locationList, #courtList, #userGroupList, #sysadminList {
+    width: 500px;
+    float: left;
+}
+
+#userList,
+#newsletterlist {
+    width: 580px;
+    min-height: 200px;
+    float: left;
+}
+
+#newsletterlist li {
+    margin-bottom: 15px;
+}
+
+.list h3 {
+    width: 488px;
+    font-size: 20px;
+    margin-top: 14px;
+    margin-bottom: 6px;
+    padding-bottom: 6px;
+    padding: 6px;
+    border-bottom: 1px solid #96A1B0;
+}
+
+#createClubButton,
+#createNewsletterButton {
+    padding-top: 7px;
+    margin-left: 150px;
+    float: left;
+}
+
+#createClubButton.itemcount0,
+#createNewsletterButton.itemcount0 {
+    padding: 5px 0px 0px 0px;
+    margin-bottom: 50px;
+    margin-left: 0px;
+    float: none;
+    display: block;
+}
+
+#createCustomerButton,
+#importCustomerButton {
+    padding-top: 20px;
+    margin-left: 80px;
+    float: left;
+}
+
+#exportCustomerButton {
+    padding-top: 10px;
+    margin-left: 80px;
+    float: left;
+}
+
+#createUserGroupButton,
+#createLocationButton,
+#createCourtButton {
+    margin-left: 150px;
+    float: left;
+}
+
+#editLocationButton {
+    display: inline;
+    float: right;
+    margin-right: 185px;
+}
+
+#createUserGroupButton.itemcount0,
+#createLocationButton.itemcount0,
+#createCourtButton.itemcount0,
+#editLocationButton.itemcount0 {
+    margin: 0px;
+    float: none;
+    display: block;
+    margin-top: 20px;
+}
+
+#createCustomerButton.itemcount0 {
+    display: block;
+    padding: 20px 0px;
+    margin: 0px;
+    float: none;
+}
+
+#deactivateUserButton {
+    margin-right: 75px;
+}
+
+#createBookingButton {
+    font-weight: bold;
+    margin: 58px 0px 0px 45px;
+}
+
+#usersearch {
+    padding-top: 7px; margin-left: 80px; float: left;
+}
+
+#usersearch .button {
+    float: right;
+}
+
+#usersearch.itemcountisQueryWithNoResults .button {
+    float: none;
+}
+
+#usersearch.itemcountisQueryWithNoResults {
+    float: none;
+    display: block;
+    margin: 20px 0px;
+    padding: 0px;
+}
+
+em.qparam {
+    font-weight: bold;
+    font-style: italic;
+}
+
+/*********************************************
+ **
+ ** jQuery Autocompleter
+ ** 
+ *********************************************/ 
+.ac_results {
+	padding: 0px;
+	border: 1px solid black;
+	background-color: white;
+	overflow: hidden;
+	z-index: 99999;
+}
+
+.ac_results ul {
+	width: 100%;
+	list-style-position: outside;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.ac_results li {
+	margin: 0px;
+	padding: 2px 5px;
+	cursor: default;
+	display: block;
+	/*
+	if width will be 100% horizontal scrollbar will apear
+	when scroll mode will be used
+	*/
+	/*width: 100%;*/
+	font: menu;
+	font-size: 12px;
+	/*
+	it is very important, if line-height not setted or setted
+	in relative units scroll will be broken in firefox
+	*/
+	line-height: 16px;
+	overflow: hidden;
+}
+
+.ac_loading {
+	background: #CBDDF7 url('../images/indicator.gif') right center no-repeat;
+}
+
+.ac_odd {
+	background-color: #eee;
+}
+
+.ac_over {
+	background-color: #0A246A;
+	color: white;
+}
+
+.form .formLine .userautocomplete {
+    margin-top: 0px;
+}
+
+/*********************************************
+ **
+ ** TimeslotsList
+ **
+ *********************************************/
+
+.timeslotslist, #timeslotsList {
+    width: 800px;
+    float: left;
+}
+
+.timeslotslist h3 {
+    width: 788px;
+}
+
+.timeslotslist ul {
+    width: 100%;
+}
+
+.timeslotslist table {
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+}
+
+.timeslotslist table th {
+    text-align: center;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #96A1B0;
+}
+
+.timeslotslist table td {
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+
+.timeslotslist .td_weekday {
+    width: 22px;
+}
+
+.timeslotslist .td_time {
+    width: 120px;
+}
+
+.timeslotslist .td_interval {
+    width: 60px;
+}
+
+.timeslotslist .td_money {
+    width: 100px;
+}
+
+.timeslotslist .td_date {
+    width: 90px;
+}
+
+.timeslotslist .td_actions {
+    text-align: right;
+}
+
+
+/*********************************************
+ **
+ ** UserList
+ **
+ *********************************************/
+ 
+.userlist table{
+    font-size: 12px;
+    table-layout: auto;
+    width: 100%;
+ }
+ 
+ .userlist table th{
+    border: 2px ridge blue;
+    font-weight: bold;
+    border-spacing:10px;
+    padding: 5px;
+    text-align: center;
+    font-size: 13px;
+ }
+ 
+ .userlist table td{
+    border: 2px ridge blue;
+    padding: 3px;
+ }
+
+.inactiveUserLine .linetext a {
+    color: #a1a1a1 !important;
+}
+ 
+ /*********************************************
+ **
+ ** UserGroupList
+ **
+ *********************************************/
+ 
+.usergroups table{
+    font-size: 12px;
+    table-layout: auto;
+    width: 75%;
+ }
+ 
+ .usergroups table th{
+    border: 2px ridge blue;
+    font-weight: bold;
+    border-spacing:10px;
+    padding: 5px;
+    text-align: center;
+    font-size: 13px;
+ }
+ 
+ .usergroups table td{
+    border: 2px ridge blue;
+    padding: 3px;
+ }
+ 
+/*********************************************
+ **
+ ** UserGroupList and UserList PrintButton
+ **
+ *********************************************/
+ 
+ div#printcontrols {
+    clear: both;    
+    height: 50px;
+ }
+ 
+/*********************************************
+ **
+ ** Userlist Export/Import Button
+ **
+ *********************************************/
+
+/** FIXME - gefährlich! jedes noaccess div? Navi? (PN) **/
+ div.noaccess {
+    display:none;
+ }
+
+/*********************************************
+ **
+ ** Transactions
+ **
+ *********************************************/
+table#txMain .txLabel,
+table#acMain .acLabel {
+    width: 160px;
+}
+
+table#txMain .txValue,
+table#acMain .acValue {
+    width: 160px;
+}
+
+table#acMain {
+    float: left;
+}
+
+table#acMain td.acMoney {
+    text-align: right;
+    padding-right: 36px;
+}
+
+table#txMain td,
+table#acMain td {
+    padding: 5px 0px;        
+}
+
+table#txMain tr.saldo td,
+table#acMain tr.saldo td {
+    border-top: 1px solid #222;
+    padding-top: 8px;
+}
+
+.debit {
+    color: #990000;
+}
+
+#txList.list li {
+    clear: both;
+    height: inherit;
+    padding-top: 7px;
+}
+
+/*********************************************
+ **
+ ** LogList
+ **
+ *********************************************/
+.loglist table{
+    font-size: 12px;
+    table-layout: auto;
+    width: 100%;
+ }
+
+ .loglist table th{
+    font-weight: bold;
+    padding: 5px;
+    text-align: center;
+    font-size: 13px;
+    border-bottom: 1px solid #96A1B0;
+ }
+
+.loglist table td {
+    padding-top: 6px;
+    padding-bottom: 3px;
+}
+
+.loglist .td_date {
+    width: 120px;
+    text-align: center;
+}
+
+.loglist .td_club {
+    width: 120px;
+    text-align: center;
+}
+
+.loglist .td_user {
+    width: 120px;
+    text-align: center;
+}
+
+.loglist .td_ip {
+    width: 150px;
+    text-align: center;
+}
+
+.loglist .td_message {
+    width: 600px;
+}
+
+.filterauswahl { 
+float:left;
+}
+
+.clear {
+clear:left;
+}
+
+/*********************************************
+ **
+ ** Club Main
+ **
+ *********************************************/
+#content #clubMain-cockpit {
+
+}
+
+#content .clubMain-spacer {
+   width: 3%; float: left; 
+}
+
+#content .clubMain-item {
+    width: 48%; float: left;
+    margin-bottom: 20px;
+}
+
+#content .clubMain-item td {
+    font-size: 14px;
+    padding: 2px 0px;
+}
+
+#usermain {
+    width: 48%;
+    float: left;
+}
+
+#usermain td,
+#usercontact td {
+    padding: 8px 0px;
+}
+
+#usermain .checkboxLine label {
+    margin-left: 10px;    
+}
+
+#usercontact {
+    width: 48%;
+    float: right;
+}

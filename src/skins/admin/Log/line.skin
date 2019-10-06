@@ -1,0 +1,14 @@
+<tr>
+<td class="td_date"><% this.date | formatDate %> <% this.date | formatTime %></td>
+<td class="td_club"><% this.club.name failmode="silent" encoding='form' %></td>
+<td class="td_user"><% this.user.username encoding='form' %></td>
+<td class="td_ip"><% this.ip %></td>
+<td class="td_message"><% this.value.message_de failmode="silent" %></td>
+</tr>
+
+<% #cockpit %>
+<tr>
+    <td><% this.date | dateFormat 'dd.MM.yyyy' %></td>
+    <td><% this.user.fullname failmode='silent' | truncate limit="22" clipping="..." | escapeHtml %></td>
+    <td><% this.getType | equals value="EDIT_USER" ignoreCase | boolean true=<% message text="Daten bearbeitet" %> false=<% message text="Anmeldung" %> %></td>
+</tr>

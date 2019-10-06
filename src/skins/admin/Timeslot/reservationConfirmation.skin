@@ -1,0 +1,36 @@
+<h3><% message text="Reservierungsbestätigung" %></h3>
+
+<!-- User --> 
+<div class="formLine px300 formLineNoInput">
+<div class="label"><% message text="Kunde" %>:</div>
+<div><a href="<% response.item.user.href %>"><% response.item.user.fullname %></a></div>
+</div>
+
+<!-- Court, Location --> 
+<div class="formLine px300 formLineNoInput">
+<div class="label"><% message text="Platz" %>:</div>
+<div><% response.item.court.name %> (<% response.item.court.location.name%>)</div>
+</div>
+
+<!-- Days --> 
+<div class="formLine px300 formLineNoInput">
+<div class="label"><% message text="Datum" %>:</div>
+<div style="padding-left: 200px"><% response.item.dates %></div>
+</div>
+
+<!-- Time --> 
+<div class="formLine px300 formLineNoInput">
+<div class="label"><% message text="Zeit" %>:</div>
+<div><% response.item.timestart | formatTime %> - <% response.item.timeend | formatTime action="set2359to2400" %> <% message text="Uhr" %></div>
+</div>
+
+<!-- Price --> 
+<div class="formLine px300 formLineNoInput">
+<div class="label"><% message text="Preis" %>:</div>
+<div><% response.item.price | formatMoney %> <% currencyCode %> (<% response.item.discount | formatMoney %>% <% message text="Rabatt" %>)</div>
+</div>
+
+<p id="printbutton">
+    <a href="JavaScript:window.print();" class="button"><span><span>Drucken</span></span></a>
+    <a href="<% court.location.href %>?day=<% response.item.timestart | formatDate %>" class="button" id="sel-loc-overview"><span><span><% message text="Hallenübersicht" %></span></span></a>
+</p>

@@ -1,0 +1,17 @@
+<form action="<% this.href action="importUsers" %>" enctype="multipart/form-data" method="POST">
+
+<% form.init old=<% response.message %> %>
+<% form.messages prefix='<div class="error">' suffix='</div>' %>
+
+<h2><% message text="Kundendaten importieren" %></h2>
+
+<input type="file" name="userlist">
+
+<br><br>
+<div class="buttons">
+    <button type="submit" value="Upload" class="submit">
+      <span><span><% message text="Upload" %></span></span>
+    </button>
+</div>
+
+</form>

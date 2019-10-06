@@ -1,0 +1,44 @@
+<h3><% message text="Reservierung stornieren" %></h3>
+
+<form id="cancelReservation" action="<% this.href action="cancel" %>" method="POST" class="form px200">
+
+<% form.init old=<% response.message %> %>
+<% form.messages prefix='<div class="error">' suffix='</div>' %>
+
+<!-- User --> 
+<div class="formLine px300 formLineNoInput">
+<div class="label"><% message text="Kunde" %>:</div>
+<div><a href="<% this.user.href %>"><% this.user.fullname encoding='form' %></a></div>
+</div>
+
+<!-- Court, Location --> 
+<div class="formLine px300 formLineNoInput">
+<div class="label"><% message text="Platz" %>:</div>
+<div><% this.timeslot.court.name encoding='form' %> (<% this.timeslot.court.location.name encoding='form' %>)</div>
+</div>
+
+<!-- Day --> 
+<div class="formLine px300 formLineNoInput">
+<div class="label"><% message text="Datum" %>:</div>
+<div><% this.timestart | formatWeekday %>, <% this.timestart | formatDate %></div>
+</div>
+
+<!-- Time --> 
+<div class="formLine px300 formLineNoInput">
+<div class="label"><% message text="Zeit" %>:</div>
+<div><% this.timestart | formatTime %> - <% this.timeend | formatTime action="set2359to2400" %> <% message text="Uhr" %></div>
+</div>
+
+<!-- Price --> 
+<div class="formLine px300 formLineNoInput">
+<div class="label"><% message text="Preis" %>:</div>
+<div><% this.transaction.price | multNegOne | formatMoney %> <% currencyCode %> (<% this.transaction.discount | toPercent | formatMoney %>% Rabatt)</div>
+</div>
+
+<div class="buttons">
+    <button type="submit" value="Submit" class="submit">
+      <span><span><% message text="Stornieren" %></span></span>
+    </button>
+    <a href="<% this.href %>" class="button cancel" style="margin-left: 15px; font-weight: bold;"><span><span><% message text="Abbrechen" %></span></span></a>
+</div>
+</form>

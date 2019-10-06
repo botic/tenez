@@ -1,0 +1,15 @@
+<h2><% message text="Kundengruppen" %></h2>
+
+<% usergrouplist.totalPages | switch 0=<% message text="Noch keine Kundengruppen angelegt."%> %>
+
+<ul class="list itemcount<% usergrouplist.totalPages %>" id="userGroupList">
+    <% usergrouplist.render skin="line" %>
+    <li class="listNavigation"><% usergrouplist.prevLink text=<% message text="zurück" %> %><span class="position"><% message text="Seite" %> <% usergrouplist.currentPage %> <% message text="von" %> <% usergrouplist.totalPages %></span><% usergrouplist.nextLink text=<% message text="weiter"%> %></li>
+</ul>
+
+<% adminuser.hasPermission name="can_add_usergroups" | boolean true=<% this.renderSkin skin="listUserGroups#create" %> %>
+
+<% #create %>
+<div id="createUserGroupButton" class="itemcount<% usergrouplist.totalPages %>">
+<a href="<% this.href action='createUserGroup' %>" class="button" style="font-weight: bold;"><span><span><% message text="Kundengruppe hinzufügen" %></span></span></a>
+</div>

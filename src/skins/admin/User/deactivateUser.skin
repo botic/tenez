@@ -1,0 +1,17 @@
+<form id="deactivateUser" action="<% this.href action="deactivate" %>" method="POST" class="form px200">
+
+<%// Init the new form and, if available, also get the previously submitted one %>
+<% form.init old=<% response.message %> %>
+
+<%// Display the error messages %>
+<% form.messages prefix='<div class="error">' suffix='</div>' %>
+
+<h3><% message text="Benutzer inaktiv setzen?" %></h3>
+
+<div class="buttons">
+    <button type="submit" value="Submit" class="submit">
+      <span><span><% message text="Inaktiv setzen" %></span></span>
+    </button>
+    <a href="<% this.href action='edit' %>" class="button cancel" style="margin-left: 15px; font-weight: bold;"><span><span><% message text="Abbrechen" %></span></span></a>
+</div>
+</form>

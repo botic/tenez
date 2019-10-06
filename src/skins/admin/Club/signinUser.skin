@@ -1,0 +1,50 @@
+<div class="loginmask">
+
+<form id="signinUser" action="<% this.href action="signin" %>" method="POST" class="form px140">
+
+<%// Init the new form and, if available, also get the previously submitted one %>
+<% form.init old=<% response.message %> %>
+
+<%// Display the error messages %>
+<% form.messages prefix='<div class="error">' suffix='</div>' %>
+
+
+<h2><% this.name encoding='form' %><br/><% message text="Anmeldung für Vereinsadministratoren" %></h2>
+
+<!-- Username -->
+<div class="formLine">
+<label for="username"><% message text="Benutzername:" %></label>
+<input type="text" value="" name="username" />
+
+<%// Add the username field to the form handler %>
+<% form.add name="username" required="true" message=<% message text="Bitte geben sie einen Benutzernamen ein!" %> missing=<% message text="Kein Benutzername angegeben." %> %>
+</div>
+
+<!-- Pin -->
+<div class="formLine">
+<label for="password"><% message text="Passwort:" %></label>
+<input type="password" value="" name="password" />
+
+<%// Add the password field to the form handler %>
+<% form.add name="password" required="true" message=<% message text="Bitte geben sie ein Passwort ein!" %> %>
+</div>
+
+<div class="buttons">
+    <button type="submit" value="Submit" class="submit">
+      <span><span><% message text="Anmelden" %></span></span>
+    </button>
+</div>
+
+</form>
+
+</div>
+
+<div class="loginhint">
+<h1><% message text="Interesse an Tenez?" %></h1>
+<p><% message text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas felis est, pretium eget blandit semper, dapibus eu nisl. Proin sit amet lacus eu turpis tristique." %></p>
+<p>
+    <a href="http://www.tenez.at" class="button"><span><span><% message text="Mehr Informationen" %></span></span></a>
+</p>
+</div>
+
+<hr/>

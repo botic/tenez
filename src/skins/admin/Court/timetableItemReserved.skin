@@ -1,0 +1,16 @@
+<div class="timetableItem reserved">
+<a href="<% param.item.reservation.href %>">
+    <div class="time start"><% param.item.start | formatTime %></div>
+    <div class="time end">&ndash; <% param.item.end | formatTime action="set2359to2400" %></div>
+    <div class="tslabel"><% param.item.reservation.user.fullname encoding='form' %></div>
+    <% param.item.price | equals value=<% param.item.reservation.transaction.price | multNegOne %> | boolean 
+            false=<% this.renderSkin skin="timetableItemReserved#priceWithDiscount" param=<% param.item %> %> 
+            true=<% this.renderSkin skin="timetableItemReserved#priceWithoutDiscount"param=<% param.item %> %> %></a>
+</div>
+
+
+<% #priceWithDiscount %>
+    <div class="price"><span class="org"><% param.price | formatMoney %> <% currencySymbol %></span><br><span class="real"><% param.reservation.transaction.price | multNegOne | formatMoney %> <% currencySymbol %></span></div>
+
+<% #priceWithoutDiscount %>
+    <div class="price"><% param.price | formatMoney %> <% currencySymbol %></div>

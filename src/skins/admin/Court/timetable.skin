@@ -1,0 +1,9 @@
+<div class="timetable" id="sel-court-<% this.alias %>">
+    <h2>
+        <% this.name encoding='form' %>
+    </h2>
+    <% this.showTimetableItems %>
+</div>
+
+<% #editAction %>
+<a href="<% this.href action='edit' %>" class="button" style="float: right;"><span><span><% message text="Editieren" %></span></span></a>

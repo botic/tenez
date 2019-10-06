@@ -1,0 +1,36 @@
+<h2><% this.location.name encoding='form' %> - <% this.name encoding='form' %></h2>
+
+<% #list %>
+<div class="list timeslotslist">
+
+<h3><% response.list_title encoding='form' %></h3>
+
+<table>
+    <tr>
+        <th><% message text="Mo" %></th>
+        <th><% message text="Di" %></th>
+        <th><% message text="Mi" %></th>
+        <th><% message text="Do" %></th>
+        <th><% message text="Fr" %></th>
+        <th><% message text="Sa" %></th>
+        <th><% message text="So" %></th>
+        <th><% message text="Zeit" %></th>
+        <th><% message text="Intervall" %></th>
+        <th><% message text="Preis" %></th>
+        <th><% message text="Gültig von" %></th>
+        <th><% message text="Gültig bis" %></th>
+        <th></th>
+    </tr>
+    <% timeslotlist.render skin="line" %>    
+</table>
+
+<ul class="list">
+    <li class="listNavigation"><% timeslotlist.prevLink text=<% message text="zurück" %> %><span class="position"><% message text="Seite" %> <% timeslotlist.currentPage %> <% message text="von" %> <% timeslotlist.totalPages %></span><% timeslotlist.nextLink text=<% message text="weiter"%> %></li>
+</ul>
+
+</div>
+
+<% #create %>
+<div style="float: right" >
+<a href="<% this.href action='createTimeslot' %>" class="button" style="font-weight: bold;" id="sel-createtimeslot"><span><span><% message text="Zeiteinheit hinzufügen" %></span></span></a>
+</div>

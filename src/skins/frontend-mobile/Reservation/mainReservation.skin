@@ -1,0 +1,59 @@
+<div class="reservationFrontend">
+
+<h3><% response.pagetitle %></h3>
+
+<!-- User --> 
+<% this.user.isCurrentUser | boolean true=<% this.renderSkin skin="mainReservation#userInfo" %> false=<% this.user.club.showuserinfo | boolean true=<% this.renderSkin skin="mainReservation#userInfo" %> %> %>  
+
+<!-- Court, Location --> 
+<div class="formLine px300 formLineNoInput">
+<div class="label"><% message text="Platz" %>:</div>
+<div><% this.timeslot.court.name %> (<% this.timeslot.court.location.name%>)</div>
+</div>
+
+<!-- Day --> 
+<div class="formLine px300 formLineNoInput">
+<div class="label"><% message text="Datum" %>:</div>
+<div><% this.timestart | formatWeekday %>, <% this.timestart | formatDate %></div>
+</div>
+
+<!-- Time --> 
+<div class="formLine px300 formLineNoInput">
+<div class="label"><% message text="Zeit" %>:</div>
+<div><% this.timestart | formatTime %> - <% this.timeend | formatTime action="set2359to2400" %> <% message text="Uhr" %></div>
+</div>
+
+<!-- Price --> 
+<% this.user.isCurrentUser | boolean true=<% this.renderSkin skin="mainReservation#priceInfoFull" %> false=<% this.renderSkin skin="mainReservation#priceInfo" %> %>  
+
+<p id="buttons" class="buttons">
+    <% response.canCancel name="can_delete_reservations" | boolean true=<% this.renderSkin skin="mainReservation#cancelButton" %> %>
+    <a href="<% this.timeslot.court.location.href %>?day=<% this.timestart | formatDate %>" class="button" id="sel-backtooverview"><span><span><% message text="Tagesübersicht" %></span></span></a>
+</p>
+
+</div>
+
+
+<% #userInfo %>
+<div class="formLine px300 formLineNoInput">
+<div class="label"><% message text="Kunde" %>:</div>
+<div><a href="<% this.user.href %>"><% this.user.fullname %></a></div>
+</div>
+
+<% #priceInfoFull %>
+<div class="formLine px300 formLineNoInput">
+<div class="label"><% message text="Preis" %>:</div>
+<div><% this.transaction.price | multNegOne | formatMoney %> <% currencyCode %> <% this.transaction.discount | equals value=0 | boolean false=<% this.renderSkin skin="cancelReservation#discount" %> %></div>
+</div>
+
+<% #discount %>
+(<% this.transaction.discount | toPercent | formatMoney %>% <% message text="Rabatt" %>)
+
+<% #priceInfo %>
+<div class="formLine px300 formLineNoInput">
+<div class="label"><% message text="Preis" %>:</div>
+<div><% this.timeslot.price | formatMoney %> <% currencyCode %></div>
+</div>
+
+<% #cancelButton %>
+<a href="<% this.href action="cancel" %>" class="button" id="sel-cancelreservation"><span><span><% message text="Stornieren" %></span></span></a>

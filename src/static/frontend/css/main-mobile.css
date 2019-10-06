@@ -1,0 +1,362 @@
+/*
+Copyright (c) 2009, Yahoo! Inc. All rights reserved.
+Code licensed under the BSD License:
+http://developer.yahoo.net/yui/license.txt
+version: 3.0.0
+build: 1549
+*/
+html{color:#000;background:#FFF;}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0;}table{border-collapse:collapse;border-spacing:0;}fieldset,img{border:0;}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal;}li{list-style:none;}caption,th{text-align:left;}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}q:before,q:after{content:'';}abbr,acronym{border:0;font-variant:normal;}sup{vertical-align:text-top;}sub{vertical-align:text-bottom;}input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit;}input,textarea,select{*font-size:100%;}legend{color:#000;}
+
+/***************
+ *   Tenez     *
+ ***************/
+
+body {
+    font-family: Arial, Verdana;
+}
+
+h1 {
+    font-size: 28px;
+    margin: 8px 0px 14px 0px;
+    text-align: center;
+}
+
+h2, h3, h4, h5, h6 {
+    font-size: 24px;
+    margin: 8px 0px 14px 0px;
+    text-align: center;
+}
+
+p {
+    line-height: 1.5em;
+    margin: 0.8em 0em;
+}
+
+strong, .strong {
+    font-weight: bold;
+}
+
+hr {
+    clear: both;
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+}
+
+.hidden {
+    display: none;
+}
+
+.clear {
+    clear: both;
+}
+
+#wrapper {
+    width: 100%;
+    margin: 0px auto;
+}
+
+#header {
+    background: url('../images/header_background_mobile.png') no-repeat;
+    background-position: center;
+    width: 100%;
+    position: relative;
+    background-color: #eef0f4;
+    height: 73px;
+}
+
+#navigation {
+    width: 100%;
+    position: relative;
+}
+
+#navigation ul#level1 {
+    background-color: #293650;
+    color: #fdfdfd;
+    font-size: 20px;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+
+#navigation ul#level1 li {
+    margin: 0 auto;
+    padding: 5px;
+}
+
+#navigation ul#level1 li#signout  {
+    background-color: #faf4d4;
+}
+
+
+#navigation ul#level1 li#signout a {
+    color: #444;
+}
+
+#navigation ul#level1 li#signout a:hover,
+#navigation ul#level1 li#signout a:focus {
+    color: #111;
+}
+
+
+#navigation ul#level1 ul {
+    display: none;
+}
+
+#navigation ul#level1 li.access:hover,
+#navigation ul#level1 li.access:focus {
+    color: #c5a861;
+    cursor: pointer;
+}
+
+#navigation ul#level1 li.access:focus ul,
+#navigation ul#level1 li.access:hover ul {
+    display: block;
+    position: absolute;
+    top: 45px;
+    left: 0px;
+    background: rgb(38, 56, 80);
+    background: rgba(38, 56, 80, 0.85);
+    -moz-border-radius: 7px;
+    -webkit-border-radius: 7px;
+    border-radius: 7px;
+    font-size: 16px;
+    padding: 5px 8px;
+}
+
+#navigation ul#level1 li.toppoint li {
+    padding: 5px 5px;
+    width: 175px;
+}
+
+#navigation a {
+    color: #f0f0f0;
+    text-decoration: none;
+}
+
+#navigation a:hover,
+#navigation a:focus {
+    color: #d8af4c;
+    text-decoration: none;
+}
+
+#content {
+    padding: 10px 25px;
+}
+
+#content .loginmaskFrontend,
+#content .resetPasswordFrontend {
+    margin: 0px auto;    
+    width: 200px;
+}
+
+#content .contactClub, 
+#content .reservationFrontend {
+    margin: 0px auto;    
+    width: 300px;
+}
+
+#content .loginmaskFrontend .buttons,
+#content .resetPasswordFrontend .buttons {
+
+}
+
+#content .loginhint {
+    float: right;
+    width: 43%;
+    padding-left: 5%;
+}
+
+#footer {
+    clear: both;
+    border-top: 1px solid #96a1b0;
+    margin-top: 40px;
+    color: #8d9eb8;
+    padding: 7px 25px;
+    font-size: 12px;
+}
+
+#content a {
+    color: #466793;
+    text-decoration: none;
+}
+
+#content a:hover {
+    color: #0c1e44;
+}
+
+a.button {
+    color: #252a36 !important;
+}
+
+.handle { float: left; margin-right: 10px; cursor: move; }
+.fx-dragging {
+    border: 1px solid #e7e67a;
+}
+
+.error {
+    padding-bottom: 10px;
+    color: #DE6C75;
+}
+
+/*********************************************
+ **
+ ** Timeslots
+ ** 
+ *********************************************/ 
+
+#content .datepicker {
+    color: #1e2840;
+    margin: 0 auto;
+    width: 200px;
+    padding-top: 15px;
+}
+
+#content .datepicker .back {
+    float: left; 
+    padding-top: 8px;
+    padding-right: 20px; 
+    font-size: 30px;
+}
+
+#content .datepicker .day {
+    float: left; 
+    text-align: center;
+}
+#content .datepicker .day .weekday {
+    font-size: 18px;
+}
+
+#content .datepicker .input {
+    width:100px; 
+    text-align: center; 
+    margin-top: 10px;
+}
+
+#content .datepicker .forward {
+    float: left; 
+    padding-top: 8px;
+    padding-left: 20px; 
+    font-size: 30px;
+}
+
+#content .datepicker .today {
+    clear: both;
+    padding-top: 6px;
+}
+
+#content .datepicker .today a.button {
+    margin-left: 56px;
+}
+
+#content .timetables {
+
+}
+
+#content .timetables .timetable {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 40px;
+}
+
+#content .timetables .timetable h2 {
+    text-align: center;
+    font-size: 22px;
+}
+
+#content .timetables .timetable .timetableItem {
+    height: 35px;
+    margin-bottom: 2px;
+    text-align: center;
+    padding-top: 5px;
+    font-size: 14px;
+    color: #40424C;
+    position: relative;
+}
+
+#content .timetables .timetable .timetableItem a {
+    color: #000000;   
+    text-decoration: none;
+}
+
+#content .timetables .timetable .timetableItem .price {
+    font-size: 11px;
+    position: absolute;
+    top:  8px;
+    right: 15px;
+    width: 50px;
+    text-align: right;
+}
+
+#content .timetables .timetable .timetableItem .tslabel {
+    position: absolute;
+    top: 12px;
+    width: 100%;
+    height: 18px;
+    overflow: hidden;
+}
+
+#content .timetables .timetable .timetableItem .time.start {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    font-weight: bold;
+}
+
+#content .timetables .timetable .timetableItem .time.end {
+    position: absolute;
+    top: 22px;
+    left: 8px;
+    font-weight: normal;
+    font-size: 10px;
+    color: #444;
+}
+
+#content .timetables .timetable .timetableItem.free {
+    background-color: #B5EE8D;
+}
+
+#content .timetables .timetable .timetableItem.free:hover,
+#content .timetables .timetable .timetableItem.free:focus {
+    background-color: #9FE66C;
+}
+
+#content .timetables .timetable .timetableItem.reserved {
+    background-color: #FBAEB4;
+}
+
+#content .timetables .timetable .timetableItem.reserved:hover,
+#content .timetables .timetable .timetableItem.reserved:focus {
+    background-color: #FF9199;
+}
+
+
+#content .timetables .timetable .timetableItem.own {
+    background-color: #faefb2; /* #9dc0d8; */
+}
+
+#content .timetables .timetable .timetableItem.own:hover,
+#content .timetables .timetable .timetableItem.own:focus {
+    background-color: #f7e583; /* #6f9cbb; */
+}
+
+#content .timetables .timetable .timetableItem.unused {
+    background-color: #DDDDDD;
+}
+
+#content .timetables .timetable .timetableItem .price .org {
+    text-decoration: line-through;
+}
+
+/*********************************************
+ **
+ ** Login
+ ** 
+ *********************************************/ 
+
+ #login_links {
+    margin-top: 30px;
+    margin-left: 90px;
+    font-size: 13px;
+ }

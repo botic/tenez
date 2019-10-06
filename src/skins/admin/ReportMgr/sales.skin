@@ -1,0 +1,39 @@
+<h2><% message text="Umsatzauswertung" %><% param.name prefix=" &ndash; " %></h2>
+
+<script type="text/javascript">
+$(document).ready(function(){
+    $("#reportYearselect").change(function(e) {
+       location = $(this).val();
+    });
+});
+</script>
+
+<div style="float: right;">
+<% message text="Jahr" %>: <% param.years %>
+</div>
+
+<div class="gfx" style="margin-top: 25px;">
+<div id="gfx-root-sales" style="height: 765px;"></div>
+<script type="text/javascript">
+    var sales = <% param.sales %>;
+    var bookings = <% param.bookings %>;
+    var weeks = [], avgSales = [], avgBookings = [];
+    for(var i = 0; i < <% param.weekcount %>; i++) {
+        weeks[i] = i+1;
+        avgSales[i] = <% param.avgSales %>;
+        avgBookings[i] = <% param.avgBookings %>;
+    }
+
+    
+    var r = Raphael("gfx-root-sales");
+
+    r.g.txtattr.font = "12px Arial, sans-serif";
+    r.g.text(155, 10, "Umsatz pro Kalenderwoche in <% param.currency %> inkl. Durchschnitt");
+    r.g.linechart(20, 32, 930, 320, [weeks], [sales, avgSales] , {shade: true, axis: "1 1 1 1"});
+
+    r.g.text(160, 408, "Reservierungen pro Kalenderwoche inkl. Durchschnitt");
+    r.g.linechart(20, 430, 930, 320, [weeks], [bookings, avgBookings] , {shade: true, axis: "1 1 1 1"});
+</script>
+</div>
+
+<hr/>

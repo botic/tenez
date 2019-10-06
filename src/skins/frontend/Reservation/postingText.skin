@@ -1,0 +1,1 @@
+<% this.timeslot.court.location.href | append str=<% this.timestart | dateFormat "'?day='dd.MM.yyyy" %> | link text=<% this.timeslot.court.location.name | append " – " | append <% this.timeslot.court.name %> | escapeHtml %> %>

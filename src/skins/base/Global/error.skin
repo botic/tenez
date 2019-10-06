@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+   <meta charset="utf-8" />
+   <title>
+      <% message text="Kein Zugriff"%> - Tenez
+   </title>
+ 
+    <link rel="stylesheet" type="text/css" media="all" href="<% staticUrl path="css/main.css" %>" />
+ 
+</head>
+<body>
+<div id="wrapper">
+
+    <div id="content">
+        <h1><% message text="Uuups! Dieser Link scheint nicht zu funktionieren." %></h1>
+        <% response.msg %>
+    </div>
+
+    <div id="footer">
+        &copy; 2010 Tenez.at
+    </div>
+</div>
+
+</body>
+</html>

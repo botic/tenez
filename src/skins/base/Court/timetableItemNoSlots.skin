@@ -1,0 +1,3 @@
+<div class="timetableItem">
+    <% message text="Keine Reservierung möglich" %>
+</div>

@@ -1,0 +1,24 @@
+<h2><% message text="Vereine" %></h2>
+<ul class="list itemcount<% clublist.totalPages %>" id="clubList">
+    <% clublist.render skin="line" %>
+    <li class="listNavigation"><% clublist.prevLink text=<% message text="zurück" %> %><span class="position"><% clublist.currentPage %> <% message text="von" %> <% clublist.totalPages %></span><% clublist.nextLink text=<% message text="weiter"%> %></li>
+</ul>
+
+<div id="createClubButton" class="itemcount<% clublist.totalPages %>">
+<a href="<% this.href action='createClub' %>" class="button" style="font-weight: bold;"><span><span><% message text="Verein hinzufügen" %></span></span></a>
+</div>
+
+<hr/>
+
+<h2><% message text="Systemadministratoren" %></h2>
+<ul class="list" id="sysadminList">
+    <% sysadminlist.render skin="line#sysadmin" %>
+    <li class="listNavigation"><% sysadminlist.prevLink text=<% message text="zurück" %> %><span class="position"><% sysadminlist.currentPage %> <% message text="von" %> <% sysadminlist.totalPages %></span><% sysadminlist.nextLink text=<% message text="weiter"%> %></li>
+</ul>
+
+
+<div style="padding-top: 7px; margin-left: 150px; float: left;" >
+<a href="<% this.href action='createSysadmin' %>" class="button" style="font-weight: bold;"><span><span><% message text="Systemadministrator hinzufügen" %></span></span></a>
+</div>
+
+<hr/>

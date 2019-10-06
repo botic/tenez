@@ -1,0 +1,14 @@
+<form id="deleteTimeslot" action="<% this.href action="delete" %>" method="POST" class="form px200">
+
+<% form.init old=<% response.message %> %>
+<% form.messages prefix='<div class="error">' suffix='</div>' %>
+
+<h3><% message text="Zeiteinheit löschen?" %></h3>
+
+<div class="buttons">
+    <button type="submit" value="Submit" class="submit">
+      <span><span><% message text="Ja" %></span></span>
+    </button>
+    <a href="<% this.court.href action="listTimeslots" %>" class="button cancel" style="margin-left: 15px; font-weight: bold;"><span><span><% message text="Nein" %></span></span></a>
+</div>
+</form>

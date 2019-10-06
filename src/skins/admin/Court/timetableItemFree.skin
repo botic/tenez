@@ -1,0 +1,8 @@
+<div class="timetableItem free">
+<a href="<% param.item.link_reserve %>" id="sel-<% this.alias %>-<% param.item.start | dateFormat format='HHMM' %>">
+    <div class="time start"><% param.item.start | formatTime %></div>
+    <div class="time end">&ndash; <% param.item.end | formatTime action="set2359to2400" %></div>
+    <div class="tslabel"><% message text="Reservieren" %></div>
+    <div class="price"><% param.item.price | formatMoney %> <% currencySymbol %></div>
+</a>
+</div>

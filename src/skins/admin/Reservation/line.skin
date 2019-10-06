@@ -1,0 +1,6 @@
+<% #cockpit %>
+<tr>
+    <td><% this.date | dateFormat 'dd.MM.yyyy' %></td>
+    <td><% this.user.fullname | truncate limit="22" clipping="..." | escapeHtml %></td>
+    <td><% this.timeslot.court.location.name encoding='form' %> - <% this.timeslot.court.name encoding='form' %></td>
+</tr>

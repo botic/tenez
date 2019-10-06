@@ -1,0 +1,26 @@
+<form id="loglist" action="<% this.href action="listLogs" %>" method="GET">
+<h2><% message text="Log" %></h2>
+<div class="filterauswahl">
+Filter:
+    <input type="checkbox" name="filter_user" value="1" <% queryParam name="filter_user" | isNull | boolean false='checked="checked"'%>> Benutzerverwaltung
+    <input type="checkbox" name="filter_club" value="2" <% queryParam name="filter_club" | isNull | boolean false='checked="checked"'%>> Vereinsverwaltung
+    <input type="checkbox" name="filter_booking" value="3" <% queryParam name="filter_booking" | isNull | boolean false='checked="checked"'%>> Buchungen
+</div>
+
+<button type="submit" value="Submit" class="submit">
+    <span><span><% message text="&nbsp;Anzeigen" %></span></span>
+</button>
+
+<div class="clear"></div>   
+    
+<div class="loglist">
+<table>
+<tr><th>Datum</th><th>Club</th><th>User</th><th>IP</th><th style="text-align: left;">Aktivität</th></tr>
+    <% loglist.render skin="line" %>
+</table>
+
+<ul class="list">
+    <li class="listNavigation"><% loglist.prevLink text=<% message text="zurück" %> %><span class="position"><% message text="Seite" %> <% loglist.currentPage %> <% message text="von" %> <% loglist.totalPages %></span><% loglist.nextLink text=<% message text="weiter"%> %></li>
+</ul>
+</div>
+</form>

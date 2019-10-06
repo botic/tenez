@@ -1,0 +1,176 @@
+<input type="hidden" name="apiurl" id="apiurl" value="<% root.href %>" />
+        
+<form id="reserve" action="<% this.href action="reserve" %>" method="POST" class="form px200">
+
+<% form.init old=<% response.message %> %>
+<% form.messages prefix='<div class="error">' suffix='</div>' %>
+
+<h2><% message text="Reservierung" %> - <% this.court.name %></h2>
+
+<script type="text/javascript">
+    $(function() {
+        // Function to format the discount and price field
+        var formatFields = function() {
+            var discount = parseFloat($('#discount').val().replace(",", "."));
+            var price = parseFloat($('#price').val().replace(",", "."));
+
+            if(!isNaN(discount) && !isNaN(price)) {
+                if(discount < 0) {
+                    discount = 0;
+                }
+                if(discount > 100) {
+                    discount = 100;
+                }
+                if(price < 0) {
+                    price = 0;
+                }
+
+                $("#discount").val(discount.toFixed(2).replace(".", ","));
+                $("#price").val(price.toFixed(2).replace(".", ","));
+            }
+        }
+
+        // Function to set the comment with the price for one reservation
+        var setCommentPricePerReservation = function(price, quantity) {
+            if(!isNaN(price) && !isNaN(quantity) && quantity > 1) {
+                var price_single = price / quantity;
+                 $("#comment_price").html("<% message text="Preis pro Einheit" %>: " + price_single.toFixed(2).replace(".", ",") + " <% currencyCode %>");
+             } else {
+                 $("#comment_price").html("");
+             }
+         }
+         
+        // Quantity -> Price Calculation
+        $("#quantity").change(function() { 
+            var price_std = parseFloat($('#price_std').val().replace(",", "."));
+            var discount = parseFloat($('#discount').val().replace(",", "."));
+            var quantity = parseInt($('#quantity').val(), 10);
+
+            if(!isNaN(price_std) && !isNaN(discount) && !isNaN(quantity) && quantity > 0) {
+                var price = price_std * (1 - discount/100) * quantity;
+                $("#price").val(price);
+
+                formatFields();
+                setCommentPricePerReservation(price, quantity);
+            }
+        });        
+        
+        // Discount -> Price Calculation        
+        $("#discount").change(function() { 
+            var price_std = parseFloat($('#price_std').val().replace(",", "."));
+            var discount = parseFloat($('#discount').val().replace(",", "."));
+            var quantity = parseInt($('#quantity').val(), 10);
+
+            if(!isNaN(price_std) && !isNaN(discount) && !isNaN(quantity) && quantity > 0) {
+                var price = price_std * (1 - discount/100) * quantity;
+                $("#price").val(price);
+
+                formatFields();
+                setCommentPricePerReservation(price, quantity);
+            }
+        });
+        
+        // Price -> Discount Calculation                
+        $("#price").change(function() { 
+            var price_std = parseFloat($('#price_std').val().replace(",", "."));
+            var quantity = parseInt($('#quantity').val(), 10);
+            var price = parseFloat($('#price').val().replace(",", "."));
+
+            if(!isNaN(price_std) && !isNaN(price) && !isNaN(quantity) && quantity > 0) {
+                var discount = (1 - (price / (price_std * quantity))) * 100;
+                $("#discount").val(discount);
+
+                formatFields();
+                setCommentPricePerReservation(price, quantity);
+            }
+        });
+
+        // Set Comment: Balance
+        $("#balance").change(function() {
+            var balance = parseFloat($("#balance").val());
+            if(!isNaN(balance)) {
+                $("#comment_balance").html("<% message text="Aktuelles Guthaben" %>: " + balance.toFixed(2).replace(".", ",") + " <% currencyCode %>");
+            } else {
+                $("#comment_balance").html("");
+            }
+        });
+
+        // Set Comment: Discount
+        $("#discount_std").change(function() {
+            var discount = parseFloat($("#discount_std").val());
+            if(!isNaN(discount) && discount >= 0 && discount <= 100) {
+                $("#comment_discount").html("<% message text="Standard-Rabatt des Kunden" %>: " + discount.toFixed(2).replace(".", ",") + "%");
+             } else {
+                 $("#comment_discount").html("");
+             }
+        });
+    });
+</script>
+
+<!-- Day --> 
+<div class="formLine px300 formLineNoInput">
+<div class="label"><% message text="Datum" %>:</div>
+<div><% response.timestart | formatWeekday %>, <% response.timestart | formatDate %></div>
+</div>
+
+<!-- Time -->
+<div class="formLine px300 formLineNoInput">
+<div class="label"><% message text="Zeit" %>:</div>
+<div><% response.timestart | formatTime %> - <% response.timeend | formatTime %> Uhr</div>
+<input type="hidden" name="start" value="<% response.start %>" />
+<% form.add name="start" validator="integer" required="true" message=<% message text="Ungültiger Start angegeben." %> missing=<% message text="Kein Start angegeben." %> %>
+</div>
+
+<!-- User -->
+<div class="formLine px300 formLineNoInput">
+<div class="label"><% message text="Kunde" %>:<span class="formRequired">*</span></div>
+<input type="hidden" value="<% this.court.location.club.id %>" name="clubId" id="clubId" /> <!-- used as parameter in main.js -->
+<input type="text" value="" name="user" id="user" class="userautocomplete" style="width: 300px;"/>
+<% form.add name="user" required="true" message=<% message text="Ungültige Kundenauswahl!" %> missing=<% message text="Kein Kunde angegeben." %> %>
+<input type="hidden" name="username" id="username" value="<% form.oldValue name='username' default='' %>" />        
+<% form.add name="username" required="false" %>
+<input type="hidden" name="balance" id="balance" value="-1" />
+<span class="comment" id="comment_balance" />
+</div>
+
+<!-- Standard-Price -->
+<div class="formLine px300 formLineNoInput">
+<div class="label"><% message text="Normalpreis pro Einheit" %>:</div>
+<div><% response.price_std | formatMoney %> <% currencyCode %></div>
+<input type="hidden" name="price_std" id="price_std" value="<% response.price_std | formatMoney %>" />
+</div>
+
+<!-- Quantity -->
+<div class="formLine px300">
+<label for="quantity"><% message text="Anzahl Wochen" %>:<span class="formRequired">*</span></label>
+<input type="text" name="quantity" id="quantity" value="<% form.oldValue name='quantity' default='1' %>" style="width: 50px; margin-right: 6px; text-align: right;" />
+<% form.add name="quantity" validator="integer" required="true" message=<% message text="Ungültige Angabe der Anzahl!" %> missing=<% message text="Keine Anzahl angegeben." %> %>
+</div>
+
+
+<!-- Discount -->
+<div class="formLine px300">
+<label for="discount"><% message text="Rabatt" %>:</label>
+<input type="text" name="discount" id="discount" value="<% form.oldValue name='discount' default='0,00' %>" style="width: 50px; margin-right: 6px; text-align: right;" /><span style="display: inline-block; width: 50px; text-align: left;">%</span>
+<% form.add name="discount" validator="percent" required="false" message=<% message text="Ungültige Prozentangabe!" %> %>
+<input type="hidden" name="discount_std" id="discount_std" value="-1" />
+<span class="comment" id="comment_discount" />
+</div>
+
+<!-- Price -->
+<div class="formLine px300">
+<label for="price"><% message text="Summe" %>:</label>
+<input type="text" name="price" id="price" value="<% form.oldValue name='price' default=<% response.price_std | formatMoney %> %>" style="width: 50px; margin-right: 6px; text-align: right;" /><span style="display: inline-block; width: 50px; text-align: left;"><% currencyCode %></span>
+<% form.add name="price" validator="money" required="true" message=<% message text="Ungültige Preisangabe!" %> missing=<% message text="Kein Preis angegeben." %> %>
+<span class="comment" id="comment_price" />
+</div>
+
+
+
+<div class="buttons">
+    <button type="submit" value="Submit" class="submit" id="sel-confirm-reservation">
+      <span><span><% message text="Speichern" %></span></span>
+    </button>
+</div>
+
+</form>

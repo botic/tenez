@@ -1,0 +1,43 @@
+<h3><% message text="Reservierung" %></h3>
+
+<!-- User --> 
+<div class="formLine px300 formLineNoInput">
+<div class="label"><% message text="Kunde" %>:</div>
+<div><a href="<% this.user.href %>"><% this.user.fullname encoding='form' %></a></div>
+</div>
+
+<!-- Court, Location --> 
+<div class="formLine px300 formLineNoInput">
+<div class="label"><% message text="Platz" %>:</div>
+<div><% this.timeslot.court.name encoding='form' %> (<% this.timeslot.court.location.name encoding='form' %>)</div>
+</div>
+
+<!-- Day --> 
+<div class="formLine px300 formLineNoInput">
+<div class="label"><% message text="Datum" %>:</div>
+<div><% this.timestart | formatWeekday %>, <% this.timestart | formatDate %></div>
+</div>
+
+<!-- Time --> 
+<div class="formLine px300 formLineNoInput">
+<div class="label"><% message text="Zeit" %>:</div>
+<div><% this.timestart | formatTime %> - <% this.timeend | formatTime action="set2359to2400" %> <% message text="Uhr" %></div>
+</div>
+
+<!-- Price --> 
+<div class="formLine px300 formLineNoInput">
+<div class="label"><% message text="Preis" %>:</div>
+<div><% this.transaction.price | multNegOne | formatMoney %> <% currencyCode %> (<% this.transaction.discount | toPercent | formatMoney %>% Rabatt)</div>
+</div>
+
+<p id="buttons">
+    <a href="JavaScript:window.print();" class="button"><span><span>Drucken</span></span></a>
+    <% adminuser.hasPermission name="can_delete_reservations" | boolean true=<% this.renderSkin skin="mainReservation#cancelButton" %> %>
+    <% adminuser.hasPermission name="can_view_locations" | boolean true=<% adminuser.hasPermission name="can_view_courts" | boolean true=<% this.renderSkin skin="mainReservation#locationOverviewButton" %> %> %>
+</p>
+
+<% #cancelButton %>
+<a href="<% this.href action="cancel" %>" class="button"><span><span>Stornieren</span></span></a>
+
+<% #locationOverviewButton %>
+<a href="<% this.timeslot.court.location.href %>?day=<% this.timestart | formatDate %>" class="button"><span><span>Tagesübersicht</span></span></a>

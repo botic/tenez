@@ -1,0 +1,40 @@
+<h2><% message text="Kundengruppen" %><% param.name prefix=" " encoding='form' %></h2>
+
+<!-- UserGroups-Infos -->
+<div class="gfx" style="margin-top: 25px;">
+<div id="gfx-root-usergroups" style="height: 495px;"></div>
+<script type="text/javascript">
+    var appdata = <% param.appdata %>;
+    var r = Raphael("gfx-root-usergroups"),
+        fin = function () {
+            this.flag = r.g.popup(this.bar.x, this.bar.y, (this.bar.value || "0") + " % ").insertBefore(this);
+        },
+        fout = function () {
+            this.flag.animate({opacity: 0}, 300, function () {this.remove();});
+        };
+    r.g.txtattr.font = "12px Arial, sans-serif";
+
+    r.g.text(97, 10, "Nach Größe");
+    r.g.piechart(100, 125, 100, appdata[0], {
+        legend: <% param.legend %>,
+        legendpos: "east"
+    });
+
+    r.g.text(615, 10, "Rabattstufen");
+    r.g.barchart(520, 40, 200, 200, [appdata[1]]).hover(fin, fout);
+
+    var memcount  = <% param.memcount %>;
+    r.g.text(97, 275, "Kundengruppen pro Kunde");
+    r.g.piechart(100, 390, 100, memcount[0], {
+        legend: <% param.memlegend %>,
+        legendpos: "east",
+        colors: ["#87bf7c", "#7cbfbb", "#ac996b", "#b98d7e", "#a47eb9"]
+    });
+</script>
+</div>
+
+<hr/>
+
+<% #empty %>
+<h2><% message text="Zu wenige Kundengruppen und Kundendaten" %></h2>
+<p><% message text="Bisher wurden noch zu wenige Kunden einer Kundengruppe zugeordnet oder zu wenige Kundengruppen angelegt." %></p>

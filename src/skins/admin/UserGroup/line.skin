@@ -1,0 +1,10 @@
+<li>
+<div class="linetext"><% this.name encoding='form' %></div>
+<div class="actions"">
+    <a href="<% this.href action='edit' %>" class="button"><span><span><% message text="Editieren" %></span></span></a>
+    <% adminuser.hasPermission name="can_view_users" | boolean true=<% this.renderSkin skin="line#listCustomersAction" %> %>
+</div>
+</li>
+
+<% #listCustomersAction %>
+    <a href="<% this.href action='listCustomers' %>" class="button"><span><span><% message text="Kunden" %></span></span></a>

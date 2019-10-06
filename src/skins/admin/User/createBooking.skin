@@ -1,0 +1,42 @@
+<form id="booking" action="<% this.href action="createBooking" %>" method="POST" class="form px200">
+
+<% form.init old=<% response.message %> %>
+<% form.messages prefix='<div class="error">' suffix='</div>' %>
+
+<h2><% message text="Buchung &ndash; Kundenkonto" %> <% this.fullname encoding='form' %></h2>
+
+<!-- Action -->
+<div class="formLine px300">
+<label for="action"><% message text="Buchungstext" %>:</label>
+<input type="text" value="<% form.oldValue name='action' encoding='form' %>" name="action" style="width: 250px;" autocomplete="off"/>
+<% form.add name="action" %>
+</div>
+
+<!-- Grossvalue -->
+<div class="formLine px300">
+<label for="grossvalue"><% message text="Bruttobetrag" %>:<span class="formRequired">*</span></label>
+<input type="text" value="<% form.oldValue name='grossvalue' default='0' encoding='form' %>" name="grossvalue" id="grossvalue" style="width: 65px; margin-right: 6px; text-align: right;" autocomplete="off" /> <% this.club.currency.code %>
+<% form.add name="grossvalue" validator="nmoney" message=<% message text="Ungültiger Betrag!" %> required="true" missing=<% message text="Kein Betrag angegeben!" %> %>
+</div>
+
+<!-- Discount -->
+<div class="formLine px300">
+<label for="discount"><% message text="Rabatt" %>:</label>
+<input type="text" value="<% form.oldValue name='discount' toPercent='true' default='0' | replace old='.' new=',' | escapeHtml %>" name="discount" id="discount" style="width: 45px; margin-right: 6px; text-align: right;" autocomplete="off" />%
+<% form.add name="discount" validator="percent" message=<% message text="Ungültige Prozentangabe!" %> required="true" missing=<% message text="Kein Rabatt angegeben." %> %>
+</div>
+
+<!-- Price -->
+<div class="formLine px300">
+<label for="price"><% message text="Nettobetrag" %>:</label>
+<input type="text" value="<% form.oldValue name='price' default='0,00' | replace old='.' new=',' | escapeHtml %>" name="price" id="price" style="width: 65px; margin-right: 6px; text-align: right;" readonly="readonly" autocomplete="off"/> <% this.club.currency.code %>
+<% form.add name="price" %>
+</div>
+
+<div class="buttons">
+    <button type="submit" value="Submit" class="submit">
+      <span><span><% message text="Buchung durchführen" %></span></span>
+    </button>
+</div>
+
+</form>

@@ -1,0 +1,28 @@
+<h2><% message text="Standort" %> <% this.name encoding='form' %></h2>
+
+<% courtlist.totalPages | switch 0=<% message text="Noch keine Plätze angelegt."%> %>
+
+<input type="hidden" name="apiurl" id="apiurl" value="<% this.href action='saveCourtOrder' %>" />
+<ul class="list itemcount<% courtlist.totalPages %>" id="courtList">
+    <% courtlist.render skin="line" %>
+</ul>
+
+<% adminuser.hasPermission name="can_add_courts" | boolean true=<% this.renderSkin skin="listCourts#create" %> %>
+
+<hr/>
+
+<% adminuser.isSysAdmin | boolean true=<% this.renderSkin skin="listCourts#deactivated"%> %>
+        
+<% #deactivated %>
+<h3 class="itemcount<% deactivatedcourtlist.totalPages %>"><% message text="Deaktivierte Plätze" %></h3>
+<ul class="list itemcount<% deactivatedcourtlist.totalPages %>" id="courtListDeactivated" style="width: 500px;">
+    <% deactivatedcourtlist.render skin="line#deactivated" %>
+</ul>
+
+<hr />
+
+<% #create %>
+<div id="createCourtButton" class="itemcount<% courtlist.totalPages %>" >
+<a href="<% this.href action='createCourt' %>" class="button" style="font-weight: bold;"><span><span><% message text="Platz hinzufügen" %></span></span></a>
+</div>
+

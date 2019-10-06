@@ -1,0 +1,55 @@
+# List of applications to start.
+# More information about this file is available at
+# http://helma.org/docs/guide/properties/apps.properties/ 
+
+
+# Administrative application to manage all other apps on this server, 
+# accessible via its default mountpoint at http://<host>:<port>/manage 
+# and using its default repository at apps/manage
+
+manage
+
+
+# More complex example of an application with custom configuration:
+#welcome
+#welcome.mountpoint = /
+#welcome.repository.0 = apps/welcome/code/
+#welcome.repository.1 = modules/helmaTools.zip
+#welcome.static = apps/welcome/static
+#welcome.staticMountpoint = /static
+#welcome.staticHome = index.html,default.html
+#welcome.staticIndex = true
+#welcome.uploadLimit = 2048
+
+# Tenez-Init
+tenez-init
+tenez-init.mountpoint       = /init
+tenez-init.repository.0     = apps/tenez/config/admin
+tenez-init.repository.1     = apps/tenez/db-mapping
+tenez-init.repository.2     = apps/tenez/apps/base
+tenez-init.repository.3     = apps/tenez/apps/admin
+tenez-init.repository.4     = apps/tenez/apps/init
+tenez-init.static           = apps/tenez/static/init
+tenez-init.staticMountpoint = /static/tenez/init
+
+# Tenez-Admin
+tenez-admin
+tenez-admin.mountpoint       = /admin
+tenez-admin.repository.0     = apps/tenez/config/admin
+tenez-admin.repository.1     = apps/tenez/db-mapping
+tenez-admin.repository.2     = apps/tenez/apps/base
+tenez-admin.repository.3     = apps/tenez/apps/admin
+tenez-admin.repository.4     = modules/jala/util/Test/code
+tenez-admin.static           = apps/tenez/static/admin
+tenez-admin.staticMountpoint = /static/tenez/admin
+
+# Tenez-Frontend
+tenez-frontend
+tenez-frontend.mountpoint       = /frontend
+tenez-frontend.repository.0     = apps/tenez/config/frontend
+tenez-frontend.repository.1     = apps/tenez/db-mapping
+tenez-frontend.repository.2     = apps/tenez/apps/base
+tenez-frontend.repository.3     = apps/tenez/apps/frontend
+tenez-frontend.repository.4     = modules/jala/util/Test/code
+tenez-frontend.static           = apps/tenez/static/frontend
+tenez-frontend.staticMountpoint = /static/tenez/frontend

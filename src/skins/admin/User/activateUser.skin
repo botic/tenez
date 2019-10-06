@@ -1,0 +1,14 @@
+<form id="activateUser" action="<% this.href action="activate" %>" method="POST" class="form px200">
+
+<% form.init old=<% response.message %> %>
+<% form.messages prefix='<div class="error">' suffix='</div>' %>
+
+<h3><% message text="Benutzer aktiv setzen?" %></h3>
+
+<div class="buttons">
+    <button type="submit" value="Submit" class="submit">
+      <span><span><% message text="Aktiv setzen" %></span></span>
+    </button>
+    <a href="<% this.href %>" class="button cancel" style="margin-left: 15px; font-weight: bold;"><span><span><% message text="Abbrechen" %></span></span></a>
+</div>
+</form>

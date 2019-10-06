@@ -1,0 +1,16 @@
+<form id="deactivateLocation" action="<% this.href action="deactivate" %>" method="POST" class="form px200">
+
+<% form.init old=<% response.message %> %>
+<% form.messages prefix='<div class="error">' suffix='</div>' %>
+
+<h2><% message text="Standort" %> <% this.name encoding='form' %> <% message text="deaktivieren" %></h2>
+
+
+<div class="buttons">
+    <button type="submit" value="Submit" class="submit">
+      <span><span><% message text="Deaktivieren" %></span></span>
+    </button>
+    <a href="<% this.club.href action='listLocations' %>" class="button cancel" style="margin-left: 15px; font-weight: bold;"><span><span><% message text="Nicht deaktivieren" %></span></span></a>
+</div>
+
+</form>

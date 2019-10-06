@@ -1,0 +1,134 @@
+<h2><% message text="Server-Informationen" %></h2>
+
+<!-- Server-Infos -->
+<div class="gfx">
+<div id="gfx-root-appstats" style="height: 240px;"></div>
+<script type="text/javascript">
+    var appdata = <% param.appdata %>;
+    var r = Raphael("gfx-root-appstats");
+    r.g.txtattr.font = "12px Arial, sans-serif";
+
+    var x = [0];
+    for (var i = 1; i < appdata.requests.length; i++) {
+        x[i] = i;
+    }
+
+    r.g.text(105, 10, "Total Requests, Not-Founds & Errors");
+    r.g.linechart(0, 10, 480, 210, x, [appdata.requests, appdata.errors, appdata.notfounds], {
+        shade: true,
+        colors: ["#a8c48c","#cdd24f","#c64747"]
+    });
+    r.g.text(550, 10, "Cached Objects");
+    r.g.linechart(500, 10, 480, 90, x, [appdata.cache], {shade: true});
+    r.g.text(550, 120, "Memory Usage");
+    r.g.linechart(500, 130, 480, 90, x, [appdata.memory], {shade: true});
+</script>
+</div>
+
+<hr/>
+
+<table id="appstats">
+<colgroup>
+    <col width="160px"/>
+    <col width="350px"/>
+</colgroup>
+<thead>
+<tr>
+    <th colspan="2" style="font-weight: bold;"><% message text="Echtzeitmessung" %></th>
+</tr>
+</thead>
+<tr>
+    <td>Sessions:</td>
+    <td><% runtime.sessions %></td>
+</tr>
+<tr>
+    <td>Cache-Usage:</td>
+    <td><% runtime.cacheUsage | formatDecimal %> <% message text="Objekte" %></td>
+</tr>
+<tr>
+    <td>Cache-Size:</td>
+    <td><% runtime.cacheSize | formatDecimal %> <% message text="Objekte" %></td>
+</tr>
+<tr class="<% isBigger than="80" value=<% runtime.memoryUsage %> | boolean true='alert'%>">
+    <td>Memory Usage:</td>
+    <td><% runtime.memoryUsage %> %</td>
+</tr>
+<tr>
+    <td>Used Memory:</td>
+    <td><% runtime.usedMemory | formatDecimal %> MByte</td>
+</tr>
+<tr>
+    <td>Free Memory:</td>
+    <td><% runtime.freeMemory | formatDecimal %> MByte</td>
+</tr>
+<tr>
+    <td>Total Memory:</td>
+    <td><% runtime.totalMemory | formatDecimal %> MByte</td>
+</tr>
+<tr>
+    <td>NotFound-Count:</td>
+    <td><% runtime.notfoundCount | formatDecimal %></td>
+</tr>
+<tr>
+    <td>Error-Count:</td>
+    <td><% runtime.errorCount | formatDecimal %></td>
+</tr>
+<tr>
+    <td>Request-Count:</td>
+    <td><% runtime.requestCount | formatDecimal %></td>
+</tr>
+<tr>
+    <td>Free Threads:</td>
+    <td><% runtime.freeThreads %></td>
+</tr>
+<tr>
+    <td>Max. Threads:</td>
+    <td><% runtime.maxThreads %></td>
+</tr>
+<tr>
+    <td>Up since:</td>
+    <td><% runtime.upSince | dateFormat "dd.MM.yyyy HH:mm" %></td>
+</tr>
+<tr>
+    <td>CPU-Count:</td>
+    <td><% runtime.cpuCount %></td>
+</tr>
+</table>
+
+<table id="runtimeinfo">
+<colgroup>
+    <col width="185px"/>
+    <col width="280px"/>
+</colgroup>
+<thead>
+<tr>
+    <th colspan="2" style="font-weight: bold;"><% message text="4 Stunden Durchschnitt" %></th>
+</tr>
+</thead>
+<tr>
+    <td>Avg. Sessions:</td>
+    <td><% avgstat.session %></td>
+</tr>
+<tr>
+    <td>Avg. Cache-Usage:</td>
+    <td><% avgstat.cache | formatDecimal %> <% message text="Objekte" %></td>
+</tr>
+<tr class="<% isBigger than="80" value=<% avgstat.memory %> | boolean true='alert'%>">
+    <td>Avg. Memory Usage:</td>
+    <td><% avgstat.memory %> %</td>
+</tr>
+<tr>
+    <td>Avg. NotFound-Count:</td>
+    <td><% avgstat.notfounds | formatDecimal %></td>
+</tr>
+<tr>
+    <td>Avg. Error-Count:</td>
+    <td><% avgstat.errors | formatDecimal %></td>
+</tr>
+<tr>
+    <td>Avg. Request-Count:</td>
+    <td><% avgstat.requests | formatDecimal %></td>
+</tr>
+</table>
+
+<hr/>

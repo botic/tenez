@@ -1,0 +1,12 @@
+<% #header %>
+<h2><% message text="Verfügbare Berichte" %></h2>
+
+<ul>
+
+<% #item %>
+<li>
+    <a href="<% param.href %>"><% param.name %></a><% param.description prefix=" &ndash; " %>
+</li>
+
+<% #footer %>
+</ul>

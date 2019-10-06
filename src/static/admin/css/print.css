@@ -1,0 +1,15 @@
+@page { 
+    size:landscape; 
+}
+
+form,
+#navigation,
+#footer,
+p#printbutton {
+    display:none;	
+}
+
+* {
+    font-family:"times new roman",times,serif;
+    text-align:justify;
+} 

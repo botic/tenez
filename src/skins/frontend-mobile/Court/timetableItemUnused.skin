@@ -1,0 +1,15 @@
+<div class="timetableItem unused">
+    <div class="time start"><% param.item.start | formatTime %></div>
+    <div class="time end">&ndash; <% param.item.end | formatTime action="set2359to2400" %></div>
+    <div class="tslabel"><% message text="" %></div>
+    <% param.item.price_std | equals value=<% param.item.price %> | boolean 
+        false=<% this.renderSkin skin="timetableItemFree#priceWithDiscount" param=<% param.item %> %> 
+        true=<% this.renderSkin skin="timetableItemFree#priceWithoutDiscount"param=<% param.item %> %> %>  
+</div>
+
+
+<% #priceWithDiscount %>
+    <div class="price"><span class="org"><% param.price_std | formatMoney %> <% currencySymbol %></span><br><span class="real"><% param.price | formatMoney %> <% currencySymbol %></span></div>
+
+<% #priceWithoutDiscount %>
+    <div class="price"><% param.price_std | formatMoney %> <% currencySymbol %></div>

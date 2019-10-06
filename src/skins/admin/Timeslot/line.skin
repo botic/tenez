@@ -1,0 +1,24 @@
+    <tr>
+        <td class="td_weekday"><% this.daymask | formatDaymaskForDay day="1" text="X" %></td>
+        <td class="td_weekday"><% this.daymask | formatDaymaskForDay day="2" text="X" %></td>
+        <td class="td_weekday"><% this.daymask | formatDaymaskForDay day="3" text="X" %></td>
+        <td class="td_weekday"><% this.daymask | formatDaymaskForDay day="4" text="X" %></td>
+        <td class="td_weekday"><% this.daymask | formatDaymaskForDay day="5" text="X" %></td>
+        <td class="td_weekday"><% this.daymask | formatDaymaskForDay day="6" text="X" %></td>
+        <td class="td_weekday"><% this.daymask | formatDaymaskForDay day="7" text="X" %></td>
+        <td class="td_time"><% this.timestart | formatTime %> - <% this.timeend | formatTime action="set2359to2400" %></td>
+        <td class="td_interval"><% this.slotsize %> min</td>
+        <td class="td_money"><% this.price | formatMoney %> <% currencyCode %></td>
+        <td class="td_date"><% this.periodstart | formatDate %></td>
+        <td class="td_date"><% this.periodend | formatDate %></td>
+        <td class="td_actions">
+            <% response.showActions | boolean true=<% adminuser.hasPermission name="can_edit_timeslots" | boolean true=<% this.renderSkin skin="line#editAction" %> %> %>
+            <% response.showActions | boolean true=<% adminuser.hasPermission name="can_delete_timeslots" | boolean true=<% this.renderSkin skin="line#deleteAction" %> %> %>
+        </td>
+    </tr>
+    
+<% #editAction %>
+<a href="<% this.href action='edit' %>" class="button sel-edittimeslot"><span><span><% message text="Editieren" %></span></span></a>
+
+<% #deleteAction %>
+<a href="<% this.href action='delete' %>" class="button sel-deletetimeslot"><span><span><% message text="Löschen" %></span></span></a>    
